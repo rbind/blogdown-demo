@@ -1,0 +1,114 @@
+---
+title: Adding citations to posts
+author: Alison Presmanes Hill
+date: '2017-08-28'
+slug: adding-citations-to-posts
+categories:
+  - R
+tags: ["blogdown"]
+bibliography: [cdc.bib, packages.bib]
+link-citations: true
+output:
+  blogdown::html_page
+nocite: | 
+  @R-knitr
+---
+
+
+
+<p>With <strong>blogdown</strong>, you are able to take advantage of several features of Pandoc’s Markdown, including adding citations. You can read more about adding citations in the <strong>bookdown</strong> book <a href="https://bookdown.org/yihui/bookdown/citations.html">here</a>.</p>
+<p>This post will demonstrate how you can add citations. There are 3 steps:</p>
+<ol style="list-style-type: decimal">
+<li>Save your <code>.bib</code> file(s) in the <code>content\post\</code> directory. The file should be a BibTeX plain-text file that contains citations that generally look like this:</li>
+</ol>
+<pre class="r"><code>@ARTICLE{key,
+required_fields [, optional_fields] }</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Reference the <code>.bib</code> file(s) in the YAML header of your post:</li>
+</ol>
+<pre class="yaml"><code>---
+bibliography: [one.bib, another.bib, yet-another.bib]
+---</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>In the text of your post, reference items in <code>.bib</code> file(s) using <code>@key</code></li>
+</ol>
+<div id="example-1-adding-citations-for-articles" class="section level1">
+<h1>Example 1: Adding citations for articles</h1>
+<p>For example, Figure <a href="#fig:cdc-sample-plot">1</a> is based on data from four publications <span class="citation">(Centers for Disease Control &amp; Prevention <a href="#ref-CentersforDiseaseControlandPrevention:2007to">2007</a>; Centers for Disease Control &amp; Prevention <a href="#ref-CentersforDiseaseControlandPrevention:2009uz">2009</a>; Centers for Disease Control &amp; Prevention <a href="#ref-CentersforDiseaseControlandPrevention:2012tn">2012</a>; Centers for Disease Control &amp; Prevention <a href="#ref-CentersforDiseaseControlandPrevention:2014td">2014</a>)</span>.</p>
+<div class="figure"><span id="fig:cdc-sample-plot"></span>
+<img src="/post/2017-08-28-adding-citations-to-posts_files/figure-html/cdc-sample-plot-1.png" alt="Different states, different stories" width="672" />
+<p class="caption">
+Figure 1: Different states, different stories
+</p>
+</div>
+<p>Notice that the articles are also linked in my above example, so you can click on the year to see the full reference. In order to do this, add this to your YAML front matter:</p>
+<pre class="yaml"><code>---
+link-citations: true
+---</code></pre>
+</div>
+<div id="example-2-adding-cites-for-r-packages-using-knitr" class="section level1">
+<h1>Example 2: Adding cites for R packages using <code>knitr</code></h1>
+<p>There is a helper function <code>write_bib()</code> in <code>knitr</code> to generate BibTeX entries automatically for R packages. You can use this method to add citations in RMarkdown posts in <strong>blogdown</strong>. The difference is that instead of saving your <code>.bib</code> file(s) in the <code>content\post\</code> directory, you will use the <code>write_bib</code> function from the <code>knitr</code> package within an R chunk. This will create a <code>.bib</code> file for you in the <code>content\post\</code> directory.</p>
+<pre class="r"><code># list specific packages
+knitr::write_bib(c(&quot;package1&quot;, &quot;package2&quot;), &quot;packages.bib&quot;)</code></pre>
+<pre class="r"><code># or include all used in the post
+knitr::write_bib(.packages(), &quot;packages.bib&quot;) </code></pre>
+<p>Add this new <code>packages.bib</code> (you may call this file anything) file to your YAML header:</p>
+<pre class="yaml"><code>---
+bibliography: [packages.bib]
+---</code></pre>
+<p>In the text of your post, reference items in the <code>knitr</code>-generated <code>.bib</code> file using <code>@R-packagename</code>. For example, in Figure <a href="#fig:cdc-sample-plot">1</a>, I used several R packages including <code>dplyr</code> <span class="citation">(Wickham and Francois <a href="#ref-R-dplyr">2016</a>)</span> and <code>ggplot2</code> <span class="citation">(Wickham and Chang <a href="#ref-R-ggplot2">2016</a>)</span>.</p>
+<p>From RStudio’s section on <a href="http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html#citations">citations</a>, the following markdown text:</p>
+<pre><code>1. Blah blah [see @R-blogdown, pp. 33-35; also @R-ggplot2, ch. 1].
+
+2. Blah blah [@R-blogdown, pp. 33-35].
+
+3. Blah blah [@R-blogdown; @R-ggplot2].
+
+4. Yihui says blah [-@R-blogdown].
+
+5. @R-blogdown says blah.</code></pre>
+<p>Generates these in-text citation styles:</p>
+<ol style="list-style-type: decimal">
+<li><p>Blah blah <span class="citation">(see Xie <a href="#ref-R-blogdown">2017</a><a href="#ref-R-blogdown">a</a>, 33–35; also Wickham and Chang <a href="#ref-R-ggplot2">2016</a>, ch. 1)</span>.</p></li>
+<li><p>Blah blah <span class="citation">(Xie <a href="#ref-R-blogdown">2017</a><a href="#ref-R-blogdown">a</a>, 33–35)</span>.</p></li>
+<li><p>Blah blah <span class="citation">(Xie <a href="#ref-R-blogdown">2017</a><a href="#ref-R-blogdown">a</a>; Wickham and Chang <a href="#ref-R-ggplot2">2016</a>)</span>.</p></li>
+<li><p>Yihui says blah <span class="citation">(<a href="#ref-R-blogdown">2017</a><a href="#ref-R-blogdown">a</a>)</span>.</p></li>
+<li><p><span class="citation">Xie (<a href="#ref-R-blogdown">2017</a><a href="#ref-R-blogdown">a</a>)</span> says blah.</p></li>
+</ol>
+<p>Finally, let’s say I want to include <code>knitr</code> in my references without an in-text citation, so I can add this to my YAML header:</p>
+<pre class="yaml"><code>---
+nocite: | 
+  @R-knitr
+---</code></pre>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<hr />
+<div id="refs" class="references">
+<div id="ref-CentersforDiseaseControlandPrevention:2007to">
+<p>Centers for Disease Control &amp; Prevention. 2007. “Prevalence of Autism Spectrum Disorders Autism and Developmental Disabilities Monitoring Network, Six Sites, United States, 2000.” <em>Morbidity and Mortality Weekly Report Surveillance Summaries</em> 56 (SS01): 1–11.</p>
+</div>
+<div id="ref-CentersforDiseaseControlandPrevention:2009uz">
+<p>———. 2009. “Prevalence of Autism Spectrum Disorders Autism and Developmental Disabilities Monitoring Network, United States, 2006.” <em>Morbidity and Mortality Weekly Report Surveillance Summaries</em> 58 (SS10): 1–20.</p>
+</div>
+<div id="ref-CentersforDiseaseControlandPrevention:2012tn">
+<p>———. 2012. “Prevalence of Autism Spectrum Disorders Autism and Developmental Disabilities Monitoring Network, 14 Sites, United States, 2008.” <em>Morbidity and Mortality Weekly Report Surveillance Summaries</em> 61 (3): 1–19.</p>
+</div>
+<div id="ref-CentersforDiseaseControlandPrevention:2014td">
+<p>———. 2014. “Prevalence of Autism Spectrum Disorder Among Children Aged 8 Years Autism and Developmental Disabilities Monitoring Network, 11 Sites, United States, 2010.” <em>Morbidity and Mortality Weekly Report Surveillance Summaries</em> 63 (2): 1–21.</p>
+</div>
+<div id="ref-R-ggplot2">
+<p>Wickham, Hadley, and Winston Chang. 2016. <em>Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2" class="uri">https://CRAN.R-project.org/package=ggplot2</a>.</p>
+</div>
+<div id="ref-R-dplyr">
+<p>Wickham, Hadley, and Romain Francois. 2016. <em>Dplyr: A Grammar of Data Manipulation</em>. <a href="https://CRAN.R-project.org/package=dplyr" class="uri">https://CRAN.R-project.org/package=dplyr</a>.</p>
+</div>
+<div id="ref-R-blogdown">
+<p>Xie, Yihui. 2017a. <em>Blogdown: Create Blogs and Websites with R Markdown</em>. <a href="https://github.com/rstudio/blogdown" class="uri">https://github.com/rstudio/blogdown</a>.</p>
+</div>
+<div id="ref-R-knitr">
+<p>———. 2017b. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://CRAN.R-project.org/package=knitr" class="uri">https://CRAN.R-project.org/package=knitr</a>.</p>
+</div>
+</div>
+</div>

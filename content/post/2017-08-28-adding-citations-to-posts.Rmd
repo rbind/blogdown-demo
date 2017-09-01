@@ -1,0 +1,173 @@
+---
+title: Adding citations to posts
+author: Alison Presmanes Hill
+date: '2017-08-28'
+slug: adding-citations-to-posts
+categories:
+  - R
+tags: ["blogdown"]
+bibliography: [cdc.bib, packages.bib]
+link-citations: true
+output:
+  blogdown::html_page
+nocite: | 
+  @R-knitr
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(comment = NA, eval = FALSE)
+
+# load packages
+packages <- c("dplyr", "ggplot2", "extrafont", "readr", "ggthemes", "blogdown", "knitr")
+lapply(packages, library, character.only = TRUE)
+
+# load data files & keep var names
+cdc <- read_csv("../../static/data/addm-since-2006.csv", col_names = TRUE) # readr
+```
+
+
+With **blogdown**, you are able to take advantage of several features of Pandoc's Markdown, including adding citations. You can read more about adding citations in the **bookdown** book [here](https://bookdown.org/yihui/bookdown/citations.html). 
+
+This post will demonstrate how you can add citations. There are 3 steps:
+
+1. Save your `.bib` file(s) in the `content\post\` directory. The file should be a BibTeX plain-text file that contains citations that generally look like this:
+
+```{r tidy = FALSE}
+@ARTICLE{key,
+required_fields [, optional_fields] }
+```
+
+2. Reference the `.bib` file(s) in the YAML header of your post: 
+
+```yaml
+---
+bibliography: [one.bib, another.bib, yet-another.bib]
+---
+```
+
+3. In the text of your post, reference items in `.bib` file(s) using `@key`
+
+# Example 1: Adding citations for articles
+
+For example, Figure \@ref(fig:cdc-sample-plot) is based on data from four publications [@CentersforDiseaseControlandPrevention:2007to; @CentersforDiseaseControlandPrevention:2009uz; @CentersforDiseaseControlandPrevention:2012tn;  @CentersforDiseaseControlandPrevention:2014td].
+
+
+```{r cdc-sample-plot, fig.cap='Different states, different stories', echo = FALSE, eval = TRUE}
+# filter sites 
+time_by_rec <- cdc %>%
+  filter(!(site %in% c("Total", "Florida", "Pennsylvania")), strata == "overall")
+
+cols <- c("#fa7268", "#4254a7")
+fig041 <- ggplot(time_by_rec) 
+fig041 <- fig041 + geom_line(aes(group = for_line, 
+                                 x = year_survey, 
+                                 y = prev_per_1k, 
+                                 colour = data_source), 
+                             lty = 3, lwd = .4) 
+fig041 <- fig041 + geom_point(aes(x = year_survey, y = prev_per_1k, colour = data_source), size = 1.5) 
+fig041 <- fig041 + facet_wrap(~ site) 
+fig041 <- fig041 + geom_linerange(aes(x = year_survey, 
+                                      ymin = l95_per_1k, 
+                                      ymax = u95_per_1k,  
+                                      colour = data_source), 
+                                  size = .5, 
+                                  alpha = .9) 
+
+fig041 <- fig041 + scale_x_continuous(breaks = c(2006, 2008, 2010, 2012), name = "Survey Year") 
+fig041 <- fig041 + scale_color_manual(values = cols, name = "Primary Record Source", labels = c("Educational + Health", "Health only")) 
+fig041 <- fig041 + expand_limits(x = c(2005, 2013), y = 0) 
+fig041 <- fig041 + scale_y_continuous(name = "Prevalence per 1000 children (95% CI)") 
+fig041 <- fig041 + theme_hc(base_family = "Lato")  
+fig041 <- fig041 + theme(panel.grid.major.y=element_line(size=.25))
+fig041 <- fig041 + theme(axis.ticks.y = element_blank())
+fig041 <- fig041 + theme(axis.ticks.length = unit(.1, "cm"))
+fig041 <- fig041 + labs(title = "Prevalence of Autism Spectrum Disorder Among Children Aged 8 Years in the US by Record Source, 2006-2012")
+fig041 <- fig041 + labs(subtitle = "Content source: CDC Autism and Developmental Disabilities Monitoring Network")
+#fig041 <- fig041 + labs(caption = "Alison Presmanes Hill @apreshill")
+fig041 <- fig041 + theme(plot.title=element_text(face="bold", size=9, margin=margin(b=6)))
+fig041 <- fig041 + theme(plot.subtitle = element_text(size=8))
+fig041 <- fig041 + theme(plot.caption = element_text(size=5, face = "italic", color = "darkgray"))
+fig041 <- fig041 + theme(legend.text = element_text(margin=margin(r=-3), size=8))
+fig041 <- fig041 + theme(legend.title = element_text(margin=margin(r=-3), size=8))
+fig041 <- fig041 + theme(axis.title = element_text(margin=margin(r=-3), size=8))
+fig041 <- fig041 + theme(axis.text = element_text(margin=margin(r=-3), size=6))
+fig041 <- fig041 + theme(strip.text = element_text(margin=margin(t = 0, b = 0), lineheight = .01, size = 8))
+
+suppressMessages(print(fig041))
+```
+
+
+Notice that the articles are also linked in my above example, so you can click on the year to see the full reference. In order to do this, add this to your YAML front matter:
+
+```yaml
+---
+link-citations: true
+---
+```
+
+
+# Example 2: Adding cites for R packages using `knitr`
+
+There is a helper function `write_bib()` in `knitr` to generate BibTeX entries automatically for R packages. You can use this method to add citations in RMarkdown posts in **blogdown**. The difference is that instead of saving your `.bib` file(s) in the `content\post\` directory, you will use the `write_bib` function from the `knitr` package within an R chunk. This will create a `.bib` file for you in the `content\post\` directory.
+
+```{r}
+# list specific packages
+knitr::write_bib(c("package1", "package2"), "packages.bib")
+```
+
+
+```{r eval = TRUE}
+# or include all used in the post
+knitr::write_bib(.packages(), "packages.bib") 
+```
+
+Add this new `packages.bib` (you may call this file anything) file to your YAML header:
+
+```yaml
+---
+bibliography: [packages.bib]
+---
+```
+    
+In the text of your post, reference items in the `knitr`-generated `.bib` file using `@R-packagename`. For example, in Figure \@ref(fig:cdc-sample-plot), I used several R packages including `dplyr` [@R-dplyr] and `ggplot2` [@R-ggplot2]. 
+
+
+
+From RStudio's section on [citations](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html#citations), the following markdown text:
+
+    1. Blah blah [see @R-blogdown, pp. 33-35; also @R-ggplot2, ch. 1].
+
+    2. Blah blah [@R-blogdown, pp. 33-35].
+
+    3. Blah blah [@R-blogdown; @R-ggplot2].
+
+    4. Yihui says blah [-@R-blogdown].
+
+    5. @R-blogdown says blah.
+
+Generates these in-text citation styles:
+
+1. Blah blah [see @R-blogdown, pp. 33-35; also @R-ggplot2, ch. 1].
+
+2. Blah blah [@R-blogdown, pp. 33-35].
+
+3. Blah blah [@R-blogdown; @R-ggplot2].
+
+4. Yihui says blah [-@R-blogdown].
+
+5. @R-blogdown says blah.
+
+Finally, let's say I want to include `knitr` in my references without an in-text citation, so I can add this to my YAML header:
+
+```yaml
+---
+nocite: | 
+  @R-knitr
+---
+```
+
+
+# References
+
+---
+
