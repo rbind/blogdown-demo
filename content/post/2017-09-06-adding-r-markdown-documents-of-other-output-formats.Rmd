@@ -38,7 +38,8 @@ Below we provide two examples (R packages [**xaringan**](https://github.com/yihu
 
 ## Example 1: Generating an HTML5 presentation based on **xaringan**
 
-[slides/xaringan.html](/slides/xaringan.html) (Rmd source: [static/slides/xaringan.Rmd](https://github.com/apreshill/blogdown-demo/blame/master/static/slides/xaringan.Rmd)).
+* [slides/xaringan.html](/slides/xaringan.html) 
+* Rmd source: [static/slides/xaringan.Rmd](https://github.com/apreshill/blogdown-demo/blame/master/static/slides/xaringan.Rmd)
 
 The YAML front matter for the Rmd specifies this output format:
 
@@ -52,7 +53,8 @@ output:
 
 ## Example 2: Generating a PDF document using the `bookdown::pdf_document2` format
 
-[pdf/example.pdf](/pdf/example.pdf) (Rmd source: [static/pdf/example.Rmd](https://github.com/apreshill/blogdown-demo/blame/master/static/pdf/example.Rmd)).
+* [pdf/example.pdf](/pdf/example.pdf) 
+* Rmd source: [static/pdf/example.Rmd](https://github.com/apreshill/blogdown-demo/blame/master/static/pdf/example.Rmd)
 
 The YAML front matter for the Rmd specifies this output format:
 
