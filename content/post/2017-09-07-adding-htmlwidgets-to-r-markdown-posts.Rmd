@@ -59,11 +59,12 @@ library(plotly)
 cols <- c("#0072B2", "#009E73", "#D55E00", "#CC79A7")
 ans_plot <- ggplot(anscombe_tidy, aes(x, y, colour = set)) +
   geom_point(size = 3, alpha = .7) +
+  geom_smooth(method = "lm", se = FALSE) + 
   facet_wrap(~ set) +
-  theme_bw()+
-  scale_colour_manual(values = cols) +
-  guides(colour = FALSE) +
-  geom_smooth(method = "lm", se = FALSE)
+  theme_bw() +
+  theme(legend.position="none") +
+  scale_colour_manual(values = cols) 
+
 ggplotly(ans_plot)
 ```
 
