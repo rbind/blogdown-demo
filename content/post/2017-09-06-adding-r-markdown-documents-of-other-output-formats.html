@@ -1,0 +1,54 @@
+---
+title: Adding R Markdown documents of other output formats
+author: ''
+date: '2017-09-06'
+slug: adding-r-markdown-documents-of-other-output-formats
+categories: []
+tags: []
+---
+
+
+
+<p>This post is a minimal example to show how you can render arbitrary Rmd documents on a <a href="https://github.com/rstudio/blogdown"><strong>blogdown</strong></a> website.</p>
+<p>Here are some possible use cases:</p>
+<ul>
+<li>You have an existing Rmd file where the knitted <code>.html</code> is the version you would like to share on your website, with options (typically specified in your YAML frontmatter) not available with a <strong>blogdown</strong> post such as:
+<ul>
+<li>a <a href="http://rmarkdown.rstudio.com/html_document_format.html#appearance_and_style">Bootstrap theme</a>,</li>
+<li><a href="http://rmarkdown.rstudio.com/html_document_format.html#tabbed_sections">tabbed sections</a>,</li>
+<li>a <a href="http://rmarkdown.rstudio.com/html_document_format.html#floating_toc">floating table of contents</a>, or</li>
+<li><a href="http://rmarkdown.rstudio.com/html_document_format.html#code_folding">code folding</a>.</li>
+</ul></li>
+<li><p>You have an existing Rmd file where the knitted <a href="http://rmarkdown.rstudio.com/pdf_document_format.html">PDF</a> is the version you would like to share on your website. For example, a resume or CV, a course syllabus, etc.</p></li>
+<li><p>You have an existing Rmd file where the knitted slide presentation is the version you want to share. See <a href="https://github.com/rstudio/blogdown/issues/97">Carl’s issue here</a>.</p></li>
+</ul>
+<p>In all of the above use cases, the underlying “raw” Rmd documents will <em>not</em> render correctly using the <code>blogdown::html_page()</code> output format (see section <a href="https://bookdown.org/yihui/blogdown/output-format.html#output-format">1.5 in the <strong>blogdown</strong> book</a>). However, you <em>can</em> render Rmd files correctly in an output format other than <code>blogdown::html_page()</code> using <strong>blogdown</strong>. See the brief documentation in the <a href="https://bookdown.org/yihui/blogdown/static-files.html"><strong>blogdown</strong> book</a>. The key is that you add an R script <code>build.R</code> under the <code>R/</code> directory (in which you can use one line of code <code>blogdown::build_dir('static')</code>), and put your Rmd files under the <code>static/</code> directory. There are 4 steps:</p>
+<ol style="list-style-type: decimal">
+<li>Go to your blogdown project’s root directory and create a new folder called <code>R</code></li>
+<li>In that <code>R/</code> directory, create a new R script that contains 1 line of code that reads: <code>blogdown::build_dir('static')</code></li>
+<li>Add and save an Rmd file to your blogdown project in the <code>static/</code> directory.
+<ul>
+<li>In fact, you can add Rmd files within subdirectories such as <code>static/slides/</code>, <code>static/pdf/</code>, and/or <code>static/html/</code></li>
+</ul></li>
+<li>Serve your site</li>
+</ol>
+<p>It does not matter which output formats your Rmd files are generated to; <code>build_dir()</code> will call <code>rmarkdown::render()</code> to render them in the output format in the YAML header. So, Rmd files present in your <code>static/</code> directory do not need to be <code>knit</code> to html in order to be rendered on your <strong>blogdown</strong> site. Any time you make changes to an Rmd file, the output file will be rendered again, overwriting the previous output file each time.</p>
+<p>Below we provide two examples (R packages <a href="https://github.com/yihui/xaringan"><strong>xaringan</strong></a> and <a href="https://github.com/rstudio/bookdown"><strong>bookdown</strong></a> are required):</p>
+<div id="example-1-generating-an-html5-presentation-based-on-xaringan" class="section level2">
+<h2>Example 1: Generating an HTML5 presentation based on <strong>xaringan</strong></h2>
+<p><a href="/slides/xaringan.html">slides/xaringan.html</a> (Rmd source: <a href="https://github.com/yihui/blogdown-static/blame/master/static/slides/xaringan.Rmd">static/slides/xaringan.Rmd</a>).</p>
+<p>The YAML front matter for the Rmd specifies this output format:</p>
+<pre class="yaml"><code>---
+output:
+  xaringan::moon_reader
+---</code></pre>
+</div>
+<div id="example-2-generating-a-pdf-document-using-the-bookdownpdf_document2-format" class="section level2">
+<h2>Example 2: Generating a PDF document using the <code>bookdown::pdf_document2</code> format</h2>
+<p><a href="/pdf/example.pdf">pdf/example.pdf</a> (Rmd source: <a href="https://github.com/yihui/blogdown-static/blame/master/static/pdf/example.Rmd">static/pdf/example.Rmd</a>).</p>
+<p>The YAML front matter for the Rmd specifies this output format:</p>
+<pre class="yaml"><code>---
+output:
+  bookdown::pdf_document2
+---</code></pre>
+</div>
