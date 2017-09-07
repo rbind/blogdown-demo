@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "https://blogdown-demo.netlify.com/"
 languageCode = "en-us"
 title = "A Hugo website"
 theme = "hugo-lithium-theme"
