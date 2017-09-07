@@ -24,11 +24,11 @@ Here are some possible use cases:
 
 * You have an existing Rmd file where the knitted slide presentation is the version you want to share. See [Carl's issue here](https://github.com/rstudio/blogdown/issues/97).
 
-In all of the above use cases, the underlying "raw" Rmd documents will *not* render correctly using the `blogdown::html_page()` output format (see section [1.5 in the **blogdown** book](https://bookdown.org/yihui/blogdown/output-format.html#output-format)). However, you *can* render Rmd files correctly in an output format other than `blogdown::html_page()` using **blogdown**. See the brief documentation in the [**blogdown** book](https://bookdown.org/yihui/blogdown/static-files.html). The key is that you add an R script `build.R` under the `R/` directory (in which you can use one line of code `blogdown::build_dir('static')`), and put your Rmd files under the `static/` directory. There are 4 steps:
+In all of the above use cases, the underlying "raw" Rmd documents will *not* render correctly using the `blogdown::html_page()` output format (see section [1.5 in the **blogdown** book](https://bookdown.org/yihui/blogdown/output-format.html#output-format)). However, you *can* render Rmd files correctly in an output format other than `blogdown::html_page()` using **blogdown**. See the brief documentation in the [**blogdown** book](https://bookdown.org/yihui/blogdown/static-files.html). The key is that you add an R script `build.R` under the `R/` directory (in which you can use one line of code `blogdown::build_dir('static')`), and put your Rmd files under the `static/` directory. Here are the four steps:
 
 1. Go to your blogdown project's root directory and create a new folder called `R`
-2. In that `R/` directory, create a new R script that contains 1 line of code that reads: `blogdown::build_dir('static')`
-3. Add and save an Rmd file to your blogdown project in the `static/` directory. 
+2. In that `R/` directory, create a new R script called `build.R` that contains 1 line of code that reads: `blogdown::build_dir('static')`
+3. Add and save Rmd file(s) to your blogdown project in the `static/` directory. 
     * In fact, you can add Rmd files within subdirectories such as `static/slides/`, `static/pdf/`, and/or `static/html/`
 4. Serve your site 
 
