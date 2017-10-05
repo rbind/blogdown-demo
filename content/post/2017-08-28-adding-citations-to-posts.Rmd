@@ -3,13 +3,8 @@ title: Adding citations to posts
 author: Alison Presmanes Hill
 date: '2017-08-28'
 slug: adding-citations-to-posts
-categories:
-  - R
-tags: ["blogdown"]
 bibliography: [cdc.bib, packages.bib]
 link-citations: true
-output:
-  blogdown::html_page
 nocite: | 
   @R-knitr
 ---
