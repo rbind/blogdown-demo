@@ -1,12 +1,8 @@
 ---
 title: Adding R Markdown documents of other output formats
-author: ''
 date: '2017-09-06'
 slug: adding-r-markdown-documents-of-other-output-formats
-categories: []
-tags: []
 ---
-
 
 This post is a minimal example to show how you can render arbitrary Rmd documents on a [**blogdown**](https://github.com/rstudio/blogdown) website. 
 
@@ -29,43 +25,9 @@ In all of the above use cases, the underlying "raw" Rmd documents will *not* ren
 1. Go to your blogdown project's root directory and create a new folder called `R`
 2. In that `R/` directory, create a new R script called `build.R` that contains 1 line of code that reads: `blogdown::build_dir('static')`
 3. Add and save Rmd file(s) to your blogdown project in the `static/` directory. 
-    * In fact, you can add Rmd files within subdirectories such as `static/slides/`, `static/pdf/`, and/or `static/html/`
+    * In fact, you can add Rmd files within sub-directories such as `static/slides/`, `static/pdf/`, and/or `static/html/`
 4. Serve your site 
 
 It does not matter which output formats your Rmd files are generated to; `build_dir()` will call `rmarkdown::render()` to render them in the output format in the YAML header. So, Rmd files present in your `static/` directory do not need to be `knit` to html in order to be rendered on your **blogdown** site. Any time you make changes to an Rmd file, the output file will be rendered again, overwriting the previous output file each time.
 
-Below we provide two examples (R packages [**xaringan**](https://github.com/yihui/xaringan) and [**bookdown**](https://github.com/rstudio/bookdown) are required):
-
-## Example 1: Generating an HTML5 presentation based on **xaringan**
-
-* [slides/xaringan.html](/slides/xaringan.html) 
-* Rmd source: [static/slides/xaringan.Rmd](https://github.com/apreshill/blogdown-demo/blame/master/static/slides/xaringan.Rmd)
-
-The YAML front matter for the Rmd specifies this output format:
-
-```yaml
----
-output:
-  xaringan::moon_reader
----
-```
-
-
-## Example 2: Generating a PDF document using the `bookdown::pdf_document2` format
-
-* [pdf/example.pdf](/pdf/example.pdf) 
-* Rmd source: [static/pdf/example.Rmd](https://github.com/apreshill/blogdown-demo/blame/master/static/pdf/example.Rmd)
-
-The YAML front matter for the Rmd specifies this output format:
-
-
-
-```yaml
----
-output:
-  bookdown::pdf_document2
----
-```
-
-
-
+Please see the Github repo [yihui/blogdown-static](https://github.com/yihui/blogdown-static) for a concrete example.
