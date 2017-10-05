@@ -54,8 +54,7 @@ datatable(rownames = FALSE,
 
 We can also interactively plot the tidied Anscombe's quartet using the `plotly`  package (with `ggplot2`):
 
-```{r message=FALSE}
-library(plotly)
+```{r}
 cols <- c("#0072B2", "#009E73", "#D55E00", "#CC79A7")
 ans_plot <- ggplot(anscombe_tidy, aes(x, y, colour = set)) +
   geom_point(size = 3, alpha = .7) +
