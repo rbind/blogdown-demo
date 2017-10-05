@@ -1,6 +1,6 @@
-baseurl = "https://blogdown-demo.netlify.com/"
+baseurl = "https://blogdown-demo.rbind.io/"
 languageCode = "en-us"
-title = "A Hugo website"
+title = "A minimal example website using blogdown"
 theme = "hugo-lithium-theme"
 googleAnalytics = ""
 disqusShortname = ""
