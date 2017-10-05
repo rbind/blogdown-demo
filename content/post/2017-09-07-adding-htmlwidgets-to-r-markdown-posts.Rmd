@@ -14,9 +14,6 @@ This is a minimal example of how to use [htmlwidgets](http://www.htmlwidgets.org
 library(tidyverse)
 library(DT)
 library(plotly)
-```
-
-```{r}
 anscombe_tidy <- anscombe %>%
     mutate(observation = seq_along(x1)) %>%
     gather(key, value, -observation) %>%
