@@ -14,7 +14,10 @@ knitr::opts_chunk$set(comment = NA, eval = FALSE)
 
 # load packages
 packages <- c("dplyr", "ggplot2", "extrafont", "readr", "ggthemes", "blogdown", "knitr")
-lapply(packages, library, character.only = TRUE)
+lapply(packages, function(x) {
+  if (!requireNamespace(x)) install.packages(x)
+  library(x, character.only = TRUE)
+})
 
 # load data files & keep var names
 cdc <- read_csv("../../static/data/addm-since-2006.csv", col_names = TRUE) # readr
