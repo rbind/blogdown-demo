@@ -1,10 +1,7 @@
 ---
 title: Adding htmlwidgets to R Markdown posts
-author: ''
 date: '2017-09-07'
 slug: adding-htmlwidgets-to-r-markdown-posts
-categories: []
-tags: []
 ---
 
 ```{r setup, include = FALSE, cache = FALSE}
@@ -66,4 +63,3 @@ ans_plot <- ggplot(anscombe_tidy, aes(x, y, colour = set)) +
 
 ggplotly(ans_plot)
 ```
-
