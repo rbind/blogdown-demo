@@ -28,20 +28,20 @@ With **blogdown**, you are able to take advantage of several features of Pandoc'
 
 This post will demonstrate how you can add citations. There are 3 steps:
 
-1. Save your `.bib` file(s) in the `content\post\` directory. The file should be a BibTeX plain-text file that contains citations that generally look like this:
+1. Save your `.bib` file(s) in the `content/post/` directory. The file should be a BibTeX plain-text file that contains citations that generally look like this:
 
-```{r tidy = FALSE}
-@ARTICLE{key,
-required_fields [, optional_fields] }
-```
+    ```{r tidy = FALSE}
+    @ARTICLE{key,
+    required_fields [, optional_fields] }
+    ```
 
 2. Reference the `.bib` file(s) in the YAML header of your post: 
 
-```yaml
----
-bibliography: [one.bib, another.bib, yet-another.bib]
----
-```
+    ```yaml
+    ---
+    bibliography: [one.bib, another.bib, yet-another.bib]
+    ---
+    ```
 
 3. In the text of your post, reference items in `.bib` file(s) using `@key`
 
@@ -106,7 +106,7 @@ link-citations: true
 
 # Example 2: Adding cites for R packages using `knitr`
 
-There is a helper function `write_bib()` in `knitr` to generate BibTeX entries automatically for R packages. You can use this method to add citations in RMarkdown posts in **blogdown**. The difference is that instead of saving your `.bib` file(s) in the `content\post\` directory, you will use the `write_bib` function from the `knitr` package within an R chunk. This will create a `.bib` file for you in the `content\post\` directory.
+There is a helper function `write_bib()` in `knitr` to generate BibTeX entries automatically for R packages. You can use this method to add citations in RMarkdown posts in **blogdown**. The difference is that instead of saving your `.bib` file(s) in the `content/post/` directory, you will use the `write_bib` function from the `knitr` package within an R chunk. This will create a `.bib` file for you in the `content/post/` directory.
 
 ```{r}
 # list specific packages
@@ -164,8 +164,4 @@ nocite: |
 ---
 ```
 
-
 # References
-
----
-
