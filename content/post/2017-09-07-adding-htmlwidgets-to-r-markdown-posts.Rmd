@@ -5,10 +5,10 @@ slug: adding-htmlwidgets-to-r-markdown-posts
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(comment = NA, tidy = FALSE)
+knitr::opts_chunk$set(comment = NA, tidy = FALSE, warning = FALSE, message = FALSE)
 ```
 
-This is a minimal example of how to use [htmlwidgets](http://www.htmlwidgets.org/index.html) in R Markdown posts. We will use a tidy version of Anscombe's quartet (thanks to [David Robinson](https://rpubs.com/dgrtwo/tidy-anscombe)). To reshape the `anscombe` dataset, you will need the `dplyr` and `tidyr` packages loaded. You'll also need to install and load the `DT` package for example 1, and the `plotly` package for example 2.
+This is a minimal example of how to use [htmlwidgets](http://www.htmlwidgets.org/index.html) in R Markdown posts. We will use a tidy version of Anscombe's quartet (thanks to [David Robinson](https://rpubs.com/dgrtwo/tidy-anscombe)). To reshape the anscombe dataset, you will need the **dplyr** and **tidyr** packages loaded. You'll also need to install and load the **DT** package for example 1, and the **ggplot2** and **plotly** packages for example 2.
 
 ```{r}
 library(dplyr)
@@ -29,9 +29,9 @@ head(anscombe_tidy)
 Now that it has been reshaped, we can view and plot Anscombe's quartet in our post.
 
 
-# Example 1: DataTables via the `DT` package
+# Example 1: DataTables via the **DT** package
 
-We can interactively view the tidied Anscombe's quartet using the `DT` package:
+We can interactively view the tidied Anscombe's quartet using the **DT** package:
 
 ```{r}
 anscombe_tidy %>% 
@@ -46,9 +46,9 @@ datatable(rownames = FALSE,
 ```
 
 
-# Example 2: Using the `plotly` package
+# Example 2: Using the **plotly** package
 
-We can also interactively plot the tidied Anscombe's quartet using the `plotly`  package (you will need the `ggplot2` package loaded here):
+We can also interactively plot the tidied Anscombe's quartet using the **plotly** package (you will need the **ggplot2** package loaded here):
 
 
 ```{r}
