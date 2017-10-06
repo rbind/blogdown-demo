@@ -1,0 +1,50 @@
+---
+title: Adding figures and other images to posts
+date: '2017-10-06'
+slug: adding-figures-and-other-images-to-posts
+---
+
+With **blogdown**, you can include figures that result from R code like plots as well as images from other sources in posts. For the former, you will need to be working from an R Markdown post, but for the latter, you can be working in either a markdown or R Markdown post. To read more about the differences between the two posting formats, read [this chapter](https://bookdown.org/yihui/blogdown/output-format.html) in the **blogdown** book.
+
+# Example 1: Including figures from R code
+
+In an R Markdown post, you can insert an R code chunk that produces a figure like this:
+
+```{r message = FALSE, warning = FALSE}
+library(ggplot2)
+oplot <- ggplot(Orange, aes(x = age, 
+                   y = circumference, 
+                   colour = Tree)) +
+  geom_point() +
+  geom_line() +
+  guides(colour = FALSE) +
+  theme_bw()
+oplot
+```
+
+You can use the **knitr** chunk options to control aspects of how the figure is displayed. Read more about these options in the [**bookdown** book](https://bookdown.org/yihui/bookdown/figures.html).
+
+You may also use the chunk options to automatically produce numbered figures with captions. To do this, you will need to do two things:
+
+1. Label the R code chunk used to produce the figure 
+2. Use the `fig.cap =` chunk option to provide a figure caption. 
+
+Note that the chunk label should not have underscores; it should only contain alphanumeric characters (a-z, A-Z, 0-9), slashes (/), or dashes (-). 
+
+To reference the figure in the text of your post, use the syntax `\@ref(fig:chunk-label)`,^[Do not forget the leading backslash! And also note the parentheses `()` after `ref`; they are not curly braces `{}`.] where `chunk-label` is the label of the chunk containing the R code that produces the figure.
+
+
+````markdown
+`r ''````{r orange-tree-fig, fig.cap = "Growth of orange trees"}
+oplot
+```
+````
+
+
+```{r orange-tree-fig, fig.cap = "Growth of orange trees", echo = FALSE}
+oplot
+```
+
+Now, a reference in the text of the post to `\@ref(fig:orange-tree-fig)` will produce a link to Figure \@ref(fig:orange-tree-fig).
+
+

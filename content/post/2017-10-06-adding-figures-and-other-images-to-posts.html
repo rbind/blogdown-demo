@@ -1,0 +1,47 @@
+---
+title: Adding figures and other images to posts
+date: '2017-10-06'
+slug: adding-figures-and-other-images-to-posts
+---
+
+
+
+<p>With <strong>blogdown</strong>, you can include figures that result from R code like plots as well as images from other sources in posts. For the former, you will need to be working from an R Markdown post, but for the latter, you can be working in either a markdown or R Markdown post. To read more about the differences between the two posting formats, read <a href="https://bookdown.org/yihui/blogdown/output-format.html">this chapter</a> in the <strong>blogdown</strong> book.</p>
+<div id="example-1-including-figures-from-r-code" class="section level1">
+<h1>Example 1: Including figures from R code</h1>
+<p>In an R Markdown post, you can insert an R code chunk that produces a figure like this:</p>
+<pre class="r"><code>library(ggplot2)
+oplot &lt;- ggplot(Orange, aes(x = age, 
+                   y = circumference, 
+                   colour = Tree)) +
+  geom_point() +
+  geom_line() +
+  guides(colour = FALSE) +
+  theme_bw()
+oplot</code></pre>
+<p><img src="/post/2017-10-06-adding-figures-and-other-images-to-posts_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>You can use the <strong>knitr</strong> chunk options to control aspects of how the figure is displayed. Read more about these options in the <a href="https://bookdown.org/yihui/bookdown/figures.html"><strong>bookdown</strong> book</a>.</p>
+<p>You may also use the chunk options to automatically produce numbered figures with captions. To do this, you will need to do two things:</p>
+<ol style="list-style-type: decimal">
+<li>Label the R code chunk used to produce the figure</li>
+<li>Use the <code>fig.cap =</code> chunk option to provide a figure caption.</li>
+</ol>
+<p>Note that the chunk label should not have underscores; it should only contain alphanumeric characters (a-z, A-Z, 0-9), slashes (/), or dashes (-).</p>
+<p>To reference the figure in the text of your post, use the syntax <code>\@ref(fig:chunk-label)</code>,<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> where <code>chunk-label</code> is the label of the chunk containing the R code that produces the figure.</p>
+<pre class="markdown"><code>```{r orange-tree-fig, fig.cap = &quot;Growth of orange trees&quot;}
+oplot
+```</code></pre>
+<div class="figure"><span id="fig:orange-tree-fig"></span>
+<img src="/post/2017-10-06-adding-figures-and-other-images-to-posts_files/figure-html/orange-tree-fig-1.png" alt="Growth of orange trees" width="672" />
+<p class="caption">
+Figure 1: Growth of orange trees
+</p>
+</div>
+<p>Now, a reference in the text of the post to <code>\@ref(fig:orange-tree-fig)</code> will produce a link to Figure <a href="#fig:orange-tree-fig">1</a>.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Do not forget the leading backslash! And also note the parentheses <code>()</code> after <code>ref</code>; they are not curly braces <code>{}</code>.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
