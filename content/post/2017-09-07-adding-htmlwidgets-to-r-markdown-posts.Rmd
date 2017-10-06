@@ -4,8 +4,8 @@ date: '2017-09-07'
 slug: adding-htmlwidgets-to-r-markdown-posts
 ---
 
-```{r setup, include = FALSE, cache = FALSE}
-knitr::opts_chunk$set(error = TRUE, comment = NA, warnings = FALSE, errors = FALSE, messages = FALSE, tidy = FALSE, eval = TRUE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(comment = NA, tidy = FALSE)
 ```
 
 This is a minimal example of how to use [htmlwidgets](http://www.htmlwidgets.org/index.html) in R Markdown posts. We will use a tidy version of Anscombe's quartet (thanks to [David Robinson](https://rpubs.com/dgrtwo/tidy-anscombe)). To reshape the `anscombe` dataset, you will need the `tidyverse` package loaded. You'll also need to install and load the `DT` package for example 1, and the `plotly` package for example 2.
