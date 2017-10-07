@@ -1,0 +1,35 @@
+---
+title: Adding R code to R Markdown posts
+date: '2017-10-06'
+slug: adding-r-code-to-r-markdown-posts
+---
+
+
+
+<p>Obviously, one of the main benefits of the <strong>blogdown</strong> package for R users is to be able to include R code in posts. To add R code, make sure that you start by creating a new R Markdown post (as opposed to a markdown post). You can do this one of two ways, either in the console:</p>
+<pre><code>blogdown::new_post(rmd = TRUE) # false is the default!</code></pre>
+<p>Or using the “new post” addin within RStudio, as described in the <a href="https://bookdown.org/yihui/blogdown/rstudio-ide.html">blogdown book</a>.</p>
+<p>As in R Markdown/<strong>knitr</strong> documents, you can include two types of R code: R code chunks, and inline R code.</p>
+<div id="example-1-adding-r-code-chunks" class="section level1">
+<h1>Example 1: Adding R code chunks</h1>
+<p>Adding an R code chunk works just like in an R Markdown document: you can use the Add Chunk command in the <a href="http://rmarkdown.rstudio.com/lesson-3.html">RStudio editor toolbar</a> or type the chunk delimiters <code>```{r}</code> and <code>```</code>. To add your R code to the chunk, insert it between the two series of backticks. You may also add chunk labels and options within the braces, separated by commas.</p>
+<pre class="markdown"><code>```{r chunk-label, echo = FALSE, fig.cap = &#39;A figure caption.&#39;}
+1 + 1
+rnorm(10)  # 10 random numbers
+plot(dist ~ speed, cars)  # a scatterplot
+```</code></pre>
+<p>To learn more about <strong>knitr</strong> chunk options, see the web page <a href="http://yihui.name/knitr/options" class="uri">http://yihui.name/knitr/options</a>. Also see the <a href="https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf">R Markdown Reference Guide</a> for a complete list of <strong>knitr</strong> chunk options.</p>
+<p>Additionally, as with R Markdown documents, you can set global options that will apply to every chunk in your post:</p>
+<pre class="markdown"><code>```{r setup, include = FALSE}
+knitr::opts_chunk$set(tidy = FALSE, echo = FALSE)
+```</code></pre>
+<p>Note that it is not recommended to change the <strong>knitr</strong> chunk options <code>fig.path</code> or <code>cache.path</code> in R Markdown. The default values of these options work best with <strong>blogdown</strong>. Please read <a href="https://bookdown.org/yihui/blogdown/dep-path.html#dep-path">Section D.5 in the <strong>blogdown</strong> book</a> to know the technical reasons if you prefer.</p>
+</div>
+<div id="example-2-adding-inline-r-code" class="section level1">
+<h1>Example 2: Adding inline R code</h1>
+<p>To add inline R code, enclose the code between two backticks, with an “r” and a space placed before the actual code: <code>`r R_CODE`</code>. So for example, <code>`r sum(1:5)`</code> would render as the number 15 in text. When using inline code, the results of the code will always be displayed (never the code), and the text formatting in your post will be applied to the results. Thus, typing 15 looks the same as the R output 15 when rendered.</p>
+</div>
+<div id="caution" class="section level1">
+<h1>Caution</h1>
+<p>If you are an R Markdown user, be careful to avoid knitting your file to html. Do serve your site (again, using either <a href="https://bookdown.org/yihui/blogdown/rstudio-ide.html">the console or RStudio addin</a>), as this function generates the html file that will be viewable on your site. LiveReload is implemented via <code>blogdown::serve_site()</code>, so if that function is running, your website (including all the posts) will be automatically rebuilt and reloaded in your web browser as soon as you edit and save your R Markdown post.</p>
+</div>
