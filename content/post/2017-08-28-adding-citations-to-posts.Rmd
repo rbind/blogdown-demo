@@ -132,7 +132,7 @@ Generates these in-text citation styles:
 
 5. @R-blogdown says blah.
 
-Finally, let's say I want to include a reference to the **bookdown** package without an in-text citation. To do this, I can add this to my YAML header:
+Finally, let's say I want to include a reference to the **bookdown** package without an in-text citation. To do this, I can add this to my YAML header, provided the in-text citation dependencies are met:
 
 ```yaml
 ---
