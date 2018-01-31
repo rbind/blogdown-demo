@@ -96,7 +96,7 @@ bibliography: [packages.bib]
 ---
 ```
 
-If you save your BibTeX file(s) to another directory, say in a folder you create like `/static/bib/`, you would update your YAML header with the correct file path (note that this does *not* need to be in quotes):
+If you save your BibTeX file(s) to another directory, say in a folder you create like `/static/bib/`, you would update your YAML header with the correct file path (*not* in quotes):
 
 ```yaml
 ---
@@ -132,7 +132,7 @@ Generates these in-text citation styles:
 
 5. @R-blogdown says blah.
 
-Finally, let's say I want to include a reference to the **bookdown** package without an in-text citation. To do this, I can add this to my YAML header:
+Finally, let's say I want to include a reference to the **bookdown** package without an in-text citation. To do this, we would include this package in our packages.bib file generated from `knitr::write_bib()` and referenceed in the YAML header in the post. Then add this to the YAML header:
 
 ```yaml
 ---
@@ -141,6 +141,6 @@ nocite: |
 ---
 ```
 
-Now you should see the **bookdown** package reference listed below.
+Now you should see the **bookdown** package reference listed below. 
 
 # References
