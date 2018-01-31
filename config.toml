@@ -5,22 +5,32 @@ theme = "hugo-lithium-theme"
 googleAnalytics = ""
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+enableEmoji = true
 
 [permalinks]
     post = "/:year/:month/:day/:slug/"
 
+
 [[menu.main]]
     name = "About"
     url = "/about/"
+    weight = 1
 [[menu.main]]
     name = "GitHub"
     url = "https://github.com/rbind/blogdown-demo"
+    weight = 2
+[[menu.main]]
+    name = "Book"
+    url = "/book/"
+    weight = 3
 [[menu.main]]
     name = "Twitter"
     url = "https://twitter.com/rstudio"
+    weight = 4
 
 [params]
     description = "A website built through Hugo and blogdown."
+    customCSS = ["css/custom.css"]
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.11.0"

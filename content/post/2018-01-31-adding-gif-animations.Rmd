@@ -1,0 +1,49 @@
+---
+title: Adding GIF animations
+author: Alison Presmanes Hill
+date: '2018-01-31'
+slug: gif-animations
+categories: []
+tags: []
+---
+
+To add a GIF animation, you'll need to install [FFmpeg](https://www.ffmpeg.org/download.html) on your computer. If you are on a macOS, you can install FFmpeg through [Homebrew](https://brew.sh) using the [formula `brew install ffmpeg`](http://brewformulas.org/Ffmpeg).
+
+To make a GIF animation, use the following **knitr** chunk options:
+
+````markdown
+`r ''````{r chunk-label, fig.show='animate', ffmpeg.format='gif', dev='jpeg'}
+for (i in 1:10) plot(runif(100), ylim = c(0, 1)) # for example
+```
+````
+
+Which would produce the GIF below...
+
+```{r random, fig.show='animate', ffmpeg.format='gif', dev='jpeg', echo = FALSE}
+for (i in 1:10) plot(runif(100), ylim = c(0, 1))
+```
+
+You can also create GIFS using the [**purrr**](http://purrr.tidyverse.org) and [**ggplot2**](http://ggplot2.tidyverse.org/index.html) packages.
+
+```{r message = FALSE, warning = FALSE}
+library(purrr)
+library(ggplot2)
+library(repurrrsive) # for the example data below
+```
+
+Below is some sample code from an awesome [**purrr** tutorial](https://github.com/cwickham/purrr-tutorial) by [Charlotte Wickham](http://cwick.co.nz). From her `map2()` [example code](https://github.com/cwickham/purrr-tutorial/blob/master/04-map2.R):
+
+```{r gapgif, fig.show='animate', ffmpeg.format='gif', dev='jpeg'}
+gap_split_small <- gap_split[1:10]
+countries <- names(gap_split_small)
+# For all countries
+plots <- map2(gap_split_small, countries, 
+  ~ ggplot(.x, aes(year, lifeExp)) + 
+      geom_line() +
+      labs(title = .y) +
+      coord_cartesian(ylim = c(0, 100))) 
+# Display all plots
+walk(plots, print)
+```
+
+
