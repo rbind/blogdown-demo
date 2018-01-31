@@ -1,0 +1,34 @@
+---
+title: Adding GIF animations
+author: Alison Presmanes Hill
+date: '2018-01-31'
+slug: gif-animations
+categories: []
+tags: []
+---
+
+
+
+<p>To add a GIF animation, you’ll need to install <a href="https://www.ffmpeg.org/download.html">FFmpeg</a> on your computer. If you are on a macOS, you can install FFmpeg through <a href="https://brew.sh">Homebrew</a> using the <a href="http://brewformulas.org/Ffmpeg">formula <code>brew install ffmpeg</code></a>.</p>
+<p>To make a GIF animation, use the following <strong>knitr</strong> chunk options:</p>
+<pre class="markdown"><code>```{r chunk-label, fig.show=&#39;animate&#39;, ffmpeg.format=&#39;gif&#39;, dev=&#39;jpeg&#39;}
+for (i in 1:10) plot(runif(100), ylim = c(0, 1)) # for example
+```</code></pre>
+<p>Which would produce the GIF below…</p>
+<p><img src="/post/2018-01-31-adding-gif-animations_files/figure-html/random.gif" width="672" /></p>
+<p>You can also create GIFS using the <a href="http://purrr.tidyverse.org"><strong>purrr</strong></a> and <a href="http://ggplot2.tidyverse.org/index.html"><strong>ggplot2</strong></a> packages.</p>
+<pre class="r"><code>library(purrr)
+library(ggplot2)
+library(repurrrsive) # for the example data below</code></pre>
+<p>Below is some sample code from an awesome <a href="https://github.com/cwickham/purrr-tutorial"><strong>purrr</strong> tutorial</a> by <a href="http://cwick.co.nz">Charlotte Wickham</a>. From her <code>map2()</code> <a href="https://github.com/cwickham/purrr-tutorial/blob/master/04-map2.R">example code</a>:</p>
+<pre class="r"><code>gap_split_small &lt;- gap_split[1:10]
+countries &lt;- names(gap_split_small)
+# For all countries
+plots &lt;- map2(gap_split_small, countries, 
+  ~ ggplot(.x, aes(year, lifeExp)) + 
+      geom_line() +
+      labs(title = .y) +
+      coord_cartesian(ylim = c(0, 100))) 
+# Display all plots
+walk(plots, print)</code></pre>
+<p><img src="/post/2018-01-31-adding-gif-animations_files/figure-html/gapgif.gif" width="672" /></p>
