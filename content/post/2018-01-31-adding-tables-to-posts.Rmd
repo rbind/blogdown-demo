@@ -45,3 +45,4 @@ ct %>%
   column_spec(4, width = "3cm") 
 ```
 
+To make an interactive table, see our post on [adding HTML widgets](/2017/09/07/adding-htmlwidgets-to-r-markdown-posts/) using the [DT package](https://rstudio.github.io/DT/).
