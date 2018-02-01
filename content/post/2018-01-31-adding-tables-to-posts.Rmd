@@ -1,0 +1,48 @@
+---
+title: Adding tables to posts
+date: '2018-01-31'
+slug: adding-tables-to-posts
+---
+
+
+The most convenient way to generate a table containing R output is the function `knitr::kable()`. Like figures, tables with captions will also be numbered and can be referenced in the text of your post. To do this, you will need to do two things:
+
+1. Label the R code chunk used to produce the table
+2. Use `knitr::kable(caption = "look at this")` to provide a table caption. 
+
+To reference the table in the text of your post, use the syntax `\@ref(tab:chunk-label)`,^[Do not forget the leading backslash! And also note the parentheses `()` after `ref`; they are not curly braces `{}`.] where `chunk-label` is the label of the chunk containing the R code that produces the table. The `kable()` function will automatically generate a label for a table environment, which is the prefix `tab:` plus the chunk label. 
+
+For example, the table label for a code chunk with the label `foo` will be `tab:foo`, and we use the syntax `\@ref(tab:label)` to reference the table in text. Table \@ref(tab:cars-kable) is a simple example.
+
+```{r cars-kable, warning = FALSE, message = FALSE}
+library(dplyr)
+library(knitr)
+ct <- mtcars[, 1:8] %>% 
+  head(10) 
+ct %>% 
+  kable("html", caption = 'A table of the first 10 rows of the mtcars data.')
+```
+
+For some additional formatting options, you can also use the [**kableExtra**](http://haozhu233.github.io/kableExtra/) package. Table \@ref(tab:cars-extra) uses the `kable_styling()` function to center the table. Read the [vignette](http://haozhu233.github.io/kableExtra/awesome_table_in_html.html) for more options. 
+
+
+```{r cars-extra, warning = FALSE, message = FALSE}
+library(kableExtra)
+ct %>% 
+  kable("html", caption = 'This table is centered.') %>%
+  kable_styling(position = "center")
+```
+
+Tables can also be formatted using the [**formattable**](https://github.com/renkun-ken/formattable) package, in combination with `knitr::kable()` and the **kableExtra** package. Table \@ref(tab:cars-colors) uses the `color_tile()` and `color_bar()` functions. Read this [vignette](http://haozhu233.github.io/kableExtra/use_kableExtra_with_formattable.html) for more options. 
+
+```{r cars-colors, warning = FALSE, message = FALSE}
+library(formattable)
+ct %>% 
+  mutate(mpg = color_tile("transparent", "lightpink")(mpg),
+         hp = color_bar("lightseagreen")(hp)) %>%
+  kable("html", escape = F, caption = 'This table is colored.') %>%
+  kable_styling(position = "center") %>% 
+  column_spec(4, width = "3cm") 
+```
+
+To make an interactive table, see our post on [adding HTML widgets](/2017/09/07/adding-htmlwidgets-to-r-markdown-posts/) using the [DT package](https://rstudio.github.io/DT/).
