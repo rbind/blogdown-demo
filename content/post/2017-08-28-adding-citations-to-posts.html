@@ -1,6 +1,7 @@
 ---
 title: Adding citations to posts
 author: Alison Presmanes Hill
+raw: "https://raw.githubusercontent.com/rbind/blogdown-demo/master/content/post/2017-08-28-adding-citations-to-posts.Rmd"
 date: '2017-08-28'
 slug: adding-citations-to-posts
 bibliography: [../../static/bib/scholar.bib, ../../static/bib/packages.bib]
@@ -59,7 +60,7 @@ bibliography: [packages.bib]
 <pre class="yaml"><code>---
 bibliography: [../../static/bib/packages.bib] 
 ---</code></pre>
-<p>In the text of your post, reference items in the <strong>knitr</strong>-generated BibTeX file using <code>@R-packagename</code>. For example, in this post, we used several R packages including <strong>blogdown</strong> <span class="citation">(Xie <a href="#ref-R-blogdown">2017</a><a href="#ref-R-blogdown">a</a>)</span> and <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-R-knitr">2017</a><a href="#ref-R-knitr">c</a>)</span>.</p>
+<p>In the text of your post, reference items in the <strong>knitr</strong>-generated BibTeX file using <code>@R-packagename</code>. For example, in this post, we used several R packages including <strong>blogdown</strong> <span class="citation">(Xie <a href="#ref-R-blogdown">2017</a><a href="#ref-R-blogdown">a</a>)</span> and <strong>knitr</strong> <span class="citation">(Xie <a href="#ref-R-knitr">2018</a>)</span>.</p>
 <p>From RStudio’s section on <a href="http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html#citations">citations</a>, the following markdown text:</p>
 <pre><code>1. Blah blah [see @R-blogdown, pp. 33-35; also @R-knitr, ch. 1].
 
@@ -72,9 +73,9 @@ bibliography: [../../static/bib/packages.bib]
 5. @R-blogdown says blah.</code></pre>
 <p>Generates these in-text citation styles:</p>
 <ol style="list-style-type: decimal">
-<li><p>Blah blah <span class="citation">(see Xie <a href="#ref-R-blogdown">2017</a><a href="#ref-R-blogdown">a</a>, 33–35; also Xie <a href="#ref-R-knitr">2017</a><a href="#ref-R-knitr">c</a>, ch. 1)</span>.</p></li>
+<li><p>Blah blah <span class="citation">(see Xie <a href="#ref-R-blogdown">2017</a><a href="#ref-R-blogdown">a</a>, 33–35; also Xie <a href="#ref-R-knitr">2018</a>, ch. 1)</span>.</p></li>
 <li><p>Blah blah <span class="citation">(Xie <a href="#ref-R-blogdown">2017</a><a href="#ref-R-blogdown">a</a>, 33–35)</span>.</p></li>
-<li><p>Blah blah <span class="citation">(Xie <a href="#ref-R-blogdown">2017</a><a href="#ref-R-blogdown">a</a>; Xie <a href="#ref-R-knitr">2017</a><a href="#ref-R-knitr">c</a>)</span>.</p></li>
+<li><p>Blah blah <span class="citation">(Xie <a href="#ref-R-blogdown">2017</a><a href="#ref-R-blogdown">a</a>; Xie <a href="#ref-R-knitr">2018</a>)</span>.</p></li>
 <li><p>Yihui says blah <span class="citation">(<a href="#ref-R-blogdown">2017</a><a href="#ref-R-blogdown">a</a>)</span>.</p></li>
 <li><p><span class="citation">Xie (<a href="#ref-R-blogdown">2017</a><a href="#ref-R-blogdown">a</a>)</span> says blah.</p></li>
 </ol>
@@ -98,7 +99,7 @@ nocite: |
 <p>———. 2017b. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>.</p>
 </div>
 <div id="ref-R-knitr">
-<p>———. 2017c. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://CRAN.R-project.org/package=knitr" class="uri">https://CRAN.R-project.org/package=knitr</a>.</p>
+<p>———. 2018. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://CRAN.R-project.org/package=knitr" class="uri">https://CRAN.R-project.org/package=knitr</a>.</p>
 </div>
 </div>
 </div>

@@ -5,6 +5,7 @@ date: '2018-01-31'
 slug: gif-animations
 categories: []
 tags: []
+raw: "https://raw.githubusercontent.com/rbind/blogdown-demo/master/content/post/2018-01-31-adding-gif-animations.Rmd"
 ---
 
 To add a GIF animation, you'll need to install [FFmpeg](https://www.ffmpeg.org/download.html) on your computer. If you are on a macOS, you can install FFmpeg through [Homebrew](https://brew.sh) using the [formula `brew install ffmpeg`](http://brewformulas.org/Ffmpeg).

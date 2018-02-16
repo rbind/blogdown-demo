@@ -2,6 +2,7 @@
 title: Adding R code to R Markdown posts
 date: '2017-10-06'
 slug: adding-r-code-to-r-markdown-posts
+raw: "https://raw.githubusercontent.com/rbind/blogdown-demo/master/content/post/2017-10-06-adding-r-code-to-r-markdown-posts.Rmd"
 ---
 
 Obviously, one of the main benefits of the **blogdown** package for R users is to be able to include R code in posts. To add R code, make sure that you start by creating a new R Markdown post (as opposed to a markdown post). You can do this one of two ways, either in the console:

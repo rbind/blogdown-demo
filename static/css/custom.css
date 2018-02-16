@@ -18,3 +18,22 @@
 .article-content a:focus {
   background: rgba(255, 166, 0, 0.3);
 }
+
+.btn {
+  font-family: 'Lato';
+  color: blue;
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 14px;
+  padding: 6px 12px;
+  font-weight: bold;
+  border-radius: 3px;
+  background-color: rgba(255, 166, 0, 0.75);
+  border: 1px solid transparent;
+  color: #fff
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: rgb(255, 166, 0);
+}

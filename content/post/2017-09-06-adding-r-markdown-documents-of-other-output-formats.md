@@ -2,6 +2,7 @@
 title: Adding R Markdown documents of other output formats
 date: '2017-09-06'
 slug: adding-r-markdown-documents-of-other-output-formats
+raw: "https://raw.githubusercontent.com/rbind/blogdown-demo/master/content/post/2017-09-06-adding-r-markdown-documents-of-other-output-formats.md"
 ---
 
 This post is a minimal example to show how you can render arbitrary Rmd documents on a [**blogdown**](https://github.com/rstudio/blogdown) website. 
