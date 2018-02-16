@@ -5,6 +5,7 @@ date: '2018-01-31'
 slug: gif-animations
 categories: []
 tags: []
+raw: "https://raw.githubusercontent.com/rbind/blogdown-demo/master/content/post/2018-01-31-adding-gif-animations.Rmd"
 ---
 
 To add a GIF animation, you'll need to install [FFmpeg](https://www.ffmpeg.org/download.html) on your computer. If you are on a macOS, you can install FFmpeg through [Homebrew](https://brew.sh) using the [formula `brew install ffmpeg`](http://brewformulas.org/Ffmpeg).
@@ -20,10 +21,11 @@ for (i in 1:10) plot(runif(100), ylim = c(0, 1)) # for example
 Which would produce the GIF below...
 
 ```{r random, fig.show='animate', ffmpeg.format='gif', dev='jpeg', echo = FALSE}
+set.seed(0)
 for (i in 1:10) plot(runif(100), ylim = c(0, 1))
 ```
 
-You can also create GIFS using the [**purrr**](http://purrr.tidyverse.org) and [**ggplot2**](http://ggplot2.tidyverse.org/index.html) packages.
+You can also create GIFs using the [**purrr**](http://purrr.tidyverse.org) and [**ggplot2**](http://ggplot2.tidyverse.org/index.html) packages.
 
 ```{r message = FALSE, warning = FALSE}
 library(purrr)

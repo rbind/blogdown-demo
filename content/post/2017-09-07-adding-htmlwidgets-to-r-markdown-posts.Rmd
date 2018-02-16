@@ -2,6 +2,7 @@
 title: Adding htmlwidgets to R Markdown posts
 date: '2017-09-07'
 slug: adding-htmlwidgets-to-r-markdown-posts
+raw: "https://raw.githubusercontent.com/rbind/blogdown-demo/master/content/post/2017-09-07-adding-htmlwidgets-to-r-markdown-posts.Rmd"
 ---
 
 ```{r setup, include = FALSE}

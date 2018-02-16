@@ -2,6 +2,7 @@
 title: Adding figures and other images to posts
 date: '2017-10-06'
 slug: adding-figures-and-other-images-to-posts
+raw: "https://raw.githubusercontent.com/rbind/blogdown-demo/master/content/post/2017-10-06-adding-figures-and-other-images-to-posts.Rmd"
 ---
 
 
@@ -43,11 +44,11 @@ Figure 1: Growth of orange trees
 <h1>Example 2: Including other images</h1>
 <p>You have a few options for adding other types of images to posts. First, you can use markdown syntax, as in:</p>
 <pre class="markdown"><code>![](/path/to/my/image.png)</code></pre>
-<p>In a <strong>blogdown</strong> site, this image file is assumed to be located in the <code>/static/</code> directory. So if you save your image file in a subdirectory called <code>/static/img/</code>, the file path would be <code>(/img/image.png)</code>.</p>
-<p>If you are working in an R Markdown post, you may also include images via the function <code>knitr::include_graphics()</code> within an R code chunk. Again, <strong>blogdown</strong> assumes that the image file is in your <code>/static/</code> directory, so the file path you provide should be relative to that directory. In the example below, the knit-logo.png file is located in the <code>/static/img/</code> directory.</p>
-<pre class="r"><code>knitr::include_graphics(rep(&#39;/img/knit-logo.png&#39;, 3))</code></pre>
+<p>In a <strong>blogdown</strong> site, this image file is assumed to be located in the <code>/static/</code> directory. So if you save your image file in a subdirectory called <code>/static/images/</code>, the file path would be <code>(/images/image.png)</code>.</p>
+<p>If you are working in an R Markdown post, you may also include images via the function <code>knitr::include_graphics()</code> within an R code chunk. Again, <strong>blogdown</strong> assumes that the image file is in your <code>/static/</code> directory, so the file path you provide should be relative to that directory. In the example below, the knit-logo.png file is located in the <code>/static/images/</code> directory.</p>
+<pre class="r"><code>knitr::include_graphics(rep(&#39;/images/knit-logo.png&#39;, 3))</code></pre>
 <div class="figure"><span id="fig:knitr-logo"></span>
-<img src="/img/knit-logo.png" alt="Three knitr logos included in the document from an external PNG image file." width="32.8%" /><img src="/img/knit-logo.png" alt="Three knitr logos included in the document from an external PNG image file." width="32.8%" /><img src="/img/knit-logo.png" alt="Three knitr logos included in the document from an external PNG image file." width="32.8%" />
+<img src="/images/knit-logo.png" alt="Three knitr logos included in the document from an external PNG image file." width="32.8%" /><img src="/images/knit-logo.png" alt="Three knitr logos included in the document from an external PNG image file." width="32.8%" /><img src="/images/knit-logo.png" alt="Three knitr logos included in the document from an external PNG image file." width="32.8%" />
 <p class="caption">
 Figure 2: Three knitr logos included in the document from an external PNG image file.
 </p>
