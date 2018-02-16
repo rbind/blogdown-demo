@@ -56,13 +56,13 @@ You have a few options for adding other types of images to posts. First, you can
 ![](/path/to/my/image.png)
 ````
 
-In a **blogdown** site, this image file is assumed to be located in the `/static/` directory. So if you save your image file in a subdirectory called `/static/img/`, the file path would be ```(/img/image.png)```.
+In a **blogdown** site, this image file is assumed to be located in the `/static/` directory. So if you save your image file in a subdirectory called `/static/images/`, the file path would be ```(/images/image.png)```.
 
-If you are working in an R Markdown post, you may also include images via the function `knitr::include_graphics()` within an R code chunk. Again, **blogdown** assumes that the image file is in your `/static/` directory, so the file path you provide should be relative to that directory. In the example below, the knit-logo.png file is located in the `/static/img/` directory.
+If you are working in an R Markdown post, you may also include images via the function `knitr::include_graphics()` within an R code chunk. Again, **blogdown** assumes that the image file is in your `/static/` directory, so the file path you provide should be relative to that directory. In the example below, the knit-logo.png file is located in the `/static/images/` directory.
 
 
 ```{r knitr-logo, out.width='32.8%', fig.show='hold', fig.cap='Three knitr logos included in the document from an external PNG image file.'}
-knitr::include_graphics(rep('/img/knit-logo.png', 3))
+knitr::include_graphics(rep('/images/knit-logo.png', 3))
 ```
 
 Figure \@ref(fig:knitr-logo) is an example of three **knitr** logos included in a figure environment. You can read more about the advantages of using the `knitr::include_graphics()` function [here](https://bookdown.org/yihui/bookdown/figures.html).

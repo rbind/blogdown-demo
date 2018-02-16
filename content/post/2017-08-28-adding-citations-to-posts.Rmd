@@ -47,7 +47,7 @@ This post will demonstrate how you can add citations. There are 3 steps:
 
 There are several ways to export citations for books or articles as a BibTeX file. One simple way is to use [Google Scholar](https://scholar.google.com) to obtain a BibTeX entry. For example, if you search for "Bookdown: Authoring Books and Technical Documents with R Markdown", you can view the citation by clicking on the quote icon underneath the entry:
 
-![](/img/google-scholar-bibtex.png)
+![](/images/google-scholar-bibtex.png)
 
 If you then click on the BibTeX link, you will see the formatted plain text version, which you can download as a file with the .bib extension:
 
