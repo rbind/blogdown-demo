@@ -10,7 +10,9 @@ raw: "https://raw.githubusercontent.com/rbind/blogdown-demo/master/content/post/
 
 To add a GIF animation, you need to install [FFmpeg](https://www.ffmpeg.org/download.html) on your computer. If you are on a macOS, you can install FFmpeg through [Homebrew](https://brew.sh) using the formula [`brew install ffmpeg`](http://brewformulas.org/Ffmpeg).
 
-To make a GIF animation, use the following **knitr** chunk options:
+You can make a GIF animation using **knitr** starting in [version 1.15](https://github.com/yihui/knitr/blob/master/NEWS.md). A GIF animation of the plots in a code chunk will be generated for HTML output when you use the chunk options `fig.show = 'animate'`,  `ffmpeg.format = 'gif'`, and `dev = 'jpeg'`.
+
+Here is an example **knitr** chunk with options:
 
 ````markdown
 `r ''````{r chunk-label, fig.show='animate', ffmpeg.format='gif', dev='jpeg'}
@@ -28,11 +30,11 @@ for (i in 1:10) plot(runif(100), ylim = c(0, 1))
 Let's break those chunk options down:
 
 
-* `fig.show =` `` `animate` ``: [how to show/arrange the plots](https://yihui.name/knitr/options/#plots); `animate` wraps all plots into an animation if there are mutiple plots in a chunk
+* [`fig.show = 'animate'`](https://yihui.name/knitr/options/#plots): how to show/arrange the plots; `animate` wraps all plots into an animation if there are mutiple plots in a chunk
 
-* `ffmpeg.format =` `` `gif` ``: [the filename of the extension video you want to *create*](https://yihui.name/knitr/options/#animation). This `.gif` file is saved in your `/static/post/` [directory](https://github.com/rbind/blogdown-demo/tree/master/static/post/2018-01-31-adding-gif-animations_files/figure-html). 
+* [`ffmpeg.format = 'gif'`](https://yihui.name/knitr/options/#animation): the filename of the extension video you want to create. This `.gif` file is also saved in your `/static/post/` [directory](https://github.com/rbind/blogdown-demo/tree/master/static/post/2018-01-31-adding-gif-animations_files/figure-html). 
 
-* `dev =` `` `jpeg` ``: [the function name which will be used as a graphical device to record the individual plots that make up the above](https://yihui.name/knitr/options/#plots). These `.jpeg` files are each saved in your `/static/post/` [directory](https://github.com/rbind/blogdown-demo/tree/master/static/post/2018-01-31-adding-gif-animations_files/figure-html). 
+* [`dev = 'jpeg'`](https://yihui.name/knitr/options/#plots): the function name which will be used as a graphical device to record the individual plots that make up the above. These `.jpeg` files are each saved in your `/static/post/` [directory](https://github.com/rbind/blogdown-demo/tree/master/static/post/2018-01-31-adding-gif-animations_files/figure-html). 
 
 You can also create GIFs using the [**purrr**](http://purrr.tidyverse.org) and [**ggplot2**](http://ggplot2.tidyverse.org/index.html) packages.
 

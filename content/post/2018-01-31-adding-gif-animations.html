@@ -11,7 +11,8 @@ raw: "https://raw.githubusercontent.com/rbind/blogdown-demo/master/content/post/
 
 
 <p>To add a GIF animation, you need to install <a href="https://www.ffmpeg.org/download.html">FFmpeg</a> on your computer. If you are on a macOS, you can install FFmpeg through <a href="https://brew.sh">Homebrew</a> using the formula <a href="http://brewformulas.org/Ffmpeg"><code>brew install ffmpeg</code></a>.</p>
-<p>To make a GIF animation, use the following <strong>knitr</strong> chunk options:</p>
+<p>You can make a GIF animation using <strong>knitr</strong> starting in <a href="https://github.com/yihui/knitr/blob/master/NEWS.md">version 1.15</a>. A GIF animation of the plots in a code chunk will be generated for HTML output when you use the chunk options <code>fig.show = 'animate'</code>, <code>ffmpeg.format = 'gif'</code>, and <code>dev = 'jpeg'</code>.</p>
+<p>Here is an example <strong>knitr</strong> chunk with options:</p>
 <pre class="markdown"><code>```{r chunk-label, fig.show=&#39;animate&#39;, ffmpeg.format=&#39;gif&#39;, dev=&#39;jpeg&#39;}
 for (i in 1:10) plot(runif(100), ylim = c(0, 1)) # for example
 ```</code></pre>
@@ -19,9 +20,9 @@ for (i in 1:10) plot(runif(100), ylim = c(0, 1)) # for example
 <p><img src="/post/2018-01-31-adding-gif-animations_files/figure-html/random.gif" width="672" /></p>
 <p>Let’s break those chunk options down:</p>
 <ul>
-<li><p><code>fig.show =</code> <code>`animate`</code>: <a href="https://yihui.name/knitr/options/#plots">how to show/arrange the plots</a>; <code>animate</code> wraps all plots into an animation if there are mutiple plots in a chunk</p></li>
-<li><p><code>ffmpeg.format =</code> <code>`gif`</code>: <a href="https://yihui.name/knitr/options/#animation">the filename of the extension video you want to <em>create</em></a>. This <code>.gif</code> file is saved in your <code>/static/post/</code> <a href="https://github.com/rbind/blogdown-demo/tree/master/static/post/2018-01-31-adding-gif-animations_files/figure-html">directory</a>.</p></li>
-<li><p><code>dev =</code> <code>`jpeg`</code>: <a href="https://yihui.name/knitr/options/#plots">the function name which will be used as a graphical device to record the individual plots that make up the above</a>. These <code>.jpeg</code> files are each saved in your <code>/static/post/</code> <a href="https://github.com/rbind/blogdown-demo/tree/master/static/post/2018-01-31-adding-gif-animations_files/figure-html">directory</a>.</p></li>
+<li><p><a href="https://yihui.name/knitr/options/#plots"><code>fig.show = 'animate'</code></a>: how to show/arrange the plots; <code>animate</code> wraps all plots into an animation if there are mutiple plots in a chunk</p></li>
+<li><p><a href="https://yihui.name/knitr/options/#animation"><code>ffmpeg.format = 'gif'</code></a>: the filename of the extension video you want to create. This <code>.gif</code> file is also saved in your <code>/static/post/</code> <a href="https://github.com/rbind/blogdown-demo/tree/master/static/post/2018-01-31-adding-gif-animations_files/figure-html">directory</a>.</p></li>
+<li><p><a href="https://yihui.name/knitr/options/#plots"><code>dev = 'jpeg'</code></a>: the function name which will be used as a graphical device to record the individual plots that make up the above. These <code>.jpeg</code> files are each saved in your <code>/static/post/</code> <a href="https://github.com/rbind/blogdown-demo/tree/master/static/post/2018-01-31-adding-gif-animations_files/figure-html">directory</a>.</p></li>
 </ul>
 <p>You can also create GIFs using the <a href="http://purrr.tidyverse.org"><strong>purrr</strong></a> and <a href="http://ggplot2.tidyverse.org/index.html"><strong>ggplot2</strong></a> packages.</p>
 <pre class="r"><code>library(purrr)
