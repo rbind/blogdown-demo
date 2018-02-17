@@ -8,7 +8,7 @@ tags: []
 raw: "https://raw.githubusercontent.com/rbind/blogdown-demo/master/content/post/2018-01-31-adding-gif-animations.Rmd"
 ---
 
-To add a GIF animation, you'll need to install [FFmpeg](https://www.ffmpeg.org/download.html) on your computer. If you are on a macOS, you can install FFmpeg through [Homebrew](https://brew.sh) using the [formula `brew install ffmpeg`](http://brewformulas.org/Ffmpeg).
+To add a GIF animation, you need to install [FFmpeg](https://www.ffmpeg.org/download.html) on your computer. If you are on a macOS, you can install FFmpeg through [Homebrew](https://brew.sh) using the formula [`brew install ffmpeg`](http://brewformulas.org/Ffmpeg).
 
 To make a GIF animation, use the following **knitr** chunk options:
 
@@ -25,6 +25,15 @@ set.seed(0)
 for (i in 1:10) plot(runif(100), ylim = c(0, 1))
 ```
 
+Let's break those chunk options down:
+
+
+* `fig.show =` `` `animate` ``: [how to show/arrange the plots](https://yihui.name/knitr/options/#plots); `animate` wraps all plots into an animation if there are mutiple plots in a chunk
+
+* `ffmpeg.format =` `` `gif` ``: [the filename of the extension video you want to *create*](https://yihui.name/knitr/options/#animation). This `.gif` file is saved in your `/static/post/` [directory](https://github.com/rbind/blogdown-demo/tree/master/static/post/2018-01-31-adding-gif-animations_files/figure-html). 
+
+* `dev =` `` `jpeg` ``: [the function name which will be used as a graphical device to record the individual plots that make up the above](https://yihui.name/knitr/options/#plots). These `.jpeg` files are each saved in your `/static/post/` [directory](https://github.com/rbind/blogdown-demo/tree/master/static/post/2018-01-31-adding-gif-animations_files/figure-html). 
+
 You can also create GIFs using the [**purrr**](http://purrr.tidyverse.org) and [**ggplot2**](http://ggplot2.tidyverse.org/index.html) packages.
 
 ```{r message = FALSE, warning = FALSE}
@@ -35,7 +44,7 @@ library(repurrrsive) # for the example data below
 
 Below is some sample code from an awesome [**purrr** tutorial](https://github.com/cwickham/purrr-tutorial) by [Charlotte Wickham](http://cwick.co.nz). From her `map2()` [example code](https://github.com/cwickham/purrr-tutorial/blob/master/04-map2.R):
 
-```{r gapgif, fig.show='animate', ffmpeg.format='gif', dev='jpeg'}
+```{r}
 gap_split_small <- gap_split[1:10]
 countries <- names(gap_split_small)
 # For all countries
@@ -44,6 +53,20 @@ plots <- map2(gap_split_small, countries,
       geom_line() +
       labs(title = .y) +
       coord_cartesian(ylim = c(0, 100))) 
+```
+
+To show these plots as an animation, we would use this code chunk:
+
+````markdown
+`r ''````{r gapgif, fig.show='animate', ffmpeg.format='gif', dev='jpeg'}
+# Display all plots
+walk(plots, print)
+```
+````
+
+Which produces the GIF below...
+
+```{r gapgif, fig.show='animate', ffmpeg.format='gif', dev='jpeg', echo = FALSE}
 # Display all plots
 walk(plots, print)
 ```

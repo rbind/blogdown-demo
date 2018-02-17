@@ -17,9 +17,9 @@
 
     {{ if eq .Section "post" }}
     <br>
-    {{ with $.Params.raw }}
-    <a class="btn" href="{{ printf "%s" . }}">View raw source for this post</a>
-    {{ end }}
+      {{ with $.Params.raw }}
+      <a class="btn" href="{{ printf "%s" . }}">View raw source for this post</a>
+      {{ end }}
     {{ end }}
 
     <div class="article-content">
