@@ -8,7 +8,32 @@ tags: []
 raw: "https://raw.githubusercontent.com/rbind/blogdown-demo/master/content/post/2018-01-31-adding-gif-animations.Rmd"
 ---
 
-To add a GIF animation, you need to install [FFmpeg](https://www.ffmpeg.org/download.html) on your computer. If you are on a macOS, you can install FFmpeg through [Homebrew](https://brew.sh) using the formula [`brew install ffmpeg`](http://brewformulas.org/Ffmpeg).
+This post will show you how to include GIFs in a **blogdown** post from a website, and how to make new GIFs from R plots (base R and **ggplot2**) using **knitr** chunk options.
+
+# Embed GIFs from a link
+
+You can add a link to any GIF online, from sites like [giphy](https://giphy.com/), using markdown syntax in either .md or .Rmd posts. For example, to embed this GIF:
+
+![](https://media.giphy.com/media/xUOxf7XfmpxuSode1O/giphy.gif)
+
+
+You would find the GIF [online](https://giphy.com/gifs/broadcity-comedy-central-season-4-xUOxf7XfmpxuSode1O), then click on "Copy Link", and select the "GIF Link" to copy:
+
+![](/images/giphy-gif-link.png)
+
+
+
+Then use markdown to refer to that link in the plain text of your post (not an R code chunk):
+
+```
+![](https://media.giphy.com/media/xUOxf7XfmpxuSode1O/giphy.gif)
+```
+
+
+
+# Embed plot GIFs using R
+
+To create a GIF animation of a plot made in R, you need to install [FFmpeg](https://www.ffmpeg.org/download.html) on your computer. If you are on a macOS, you can install FFmpeg through [Homebrew](https://brew.sh) using the formula [`brew install ffmpeg`](http://brewformulas.org/Ffmpeg).
 
 You can make a GIF animation using **knitr** starting in [version 1.15](https://github.com/yihui/knitr/blob/master/NEWS.md). A GIF animation of the plots in a code chunk will be generated for HTML output when you use the chunk options `fig.show = 'animate'`,  `ffmpeg.format = 'gif'`, and `dev = 'jpeg'`.
 

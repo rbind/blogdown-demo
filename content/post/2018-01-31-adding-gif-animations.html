@@ -10,7 +10,25 @@ raw: "https://raw.githubusercontent.com/rbind/blogdown-demo/master/content/post/
 
 
 
-<p>To add a GIF animation, you need to install <a href="https://www.ffmpeg.org/download.html">FFmpeg</a> on your computer. If you are on a macOS, you can install FFmpeg through <a href="https://brew.sh">Homebrew</a> using the formula <a href="http://brewformulas.org/Ffmpeg"><code>brew install ffmpeg</code></a>.</p>
+<p>This post will show you how to include GIFs in a <strong>blogdown</strong> post from a website, and how to make new GIFs from R plots (base R and <strong>ggplot2</strong>) using <strong>knitr</strong> chunk options.</p>
+<div id="embed-gifs-from-a-link" class="section level1">
+<h1>Embed GIFs from a link</h1>
+<p>You can add a link to any GIF online, from sites like <a href="https://giphy.com/">giphy</a>, using markdown syntax in either .md or .Rmd posts. For example, to embed this GIF:</p>
+<div class="figure">
+<img src="https://media.giphy.com/media/xUOxf7XfmpxuSode1O/giphy.gif" />
+
+</div>
+<p>You would find the GIF <a href="https://giphy.com/gifs/broadcity-comedy-central-season-4-xUOxf7XfmpxuSode1O">online</a>, then click on “Copy Link”, and select the “GIF Link” to copy:</p>
+<div class="figure">
+<img src="/images/giphy-gif-link.png" />
+
+</div>
+<p>Then use markdown to refer to that link in the plain text of your post (not an R code chunk):</p>
+<pre><code>![](https://media.giphy.com/media/xUOxf7XfmpxuSode1O/giphy.gif)</code></pre>
+</div>
+<div id="embed-plot-gifs-using-r" class="section level1">
+<h1>Embed plot GIFs using R</h1>
+<p>To create a GIF animation of a plot made in R, you need to install <a href="https://www.ffmpeg.org/download.html">FFmpeg</a> on your computer. If you are on a macOS, you can install FFmpeg through <a href="https://brew.sh">Homebrew</a> using the formula <a href="http://brewformulas.org/Ffmpeg"><code>brew install ffmpeg</code></a>.</p>
 <p>You can make a GIF animation using <strong>knitr</strong> starting in <a href="https://github.com/yihui/knitr/blob/master/NEWS.md">version 1.15</a>. A GIF animation of the plots in a code chunk will be generated for HTML output when you use the chunk options <code>fig.show = 'animate'</code>, <code>ffmpeg.format = 'gif'</code>, and <code>dev = 'jpeg'</code>.</p>
 <p>Here is an example <strong>knitr</strong> chunk with options:</p>
 <pre class="markdown"><code>```{r chunk-label, fig.show=&#39;animate&#39;, ffmpeg.format=&#39;gif&#39;, dev=&#39;jpeg&#39;}
@@ -44,3 +62,4 @@ walk(plots, print)
 ```</code></pre>
 <p>Which produces the GIF below…</p>
 <p><img src="/post/2018-01-31-adding-gif-animations_files/figure-html/gapgif.gif" width="672" /></p>
+</div>
