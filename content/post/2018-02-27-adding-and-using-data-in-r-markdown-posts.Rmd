@@ -1,0 +1,147 @@
+---
+title: Adding and reading local data files in R Markdown posts
+date: '2018-02-27'
+slug: r-file-paths
+output:
+  blogdown::html_page:
+    toc: true
+    number_sections: true
+---
+
+# Problem
+
+**Problem:** You want to read in a data file in an R code chunk in an R Markdown post. But:
+
+- Where should you save the data file? 
+- What file path will work to run the code chunks in the console?
+- What file path will work when you serve site?
+
+**Solution:** Read on.
+
+![](https://media.giphy.com/media/3o7bu7YzD4FONt1nVK/giphy.gif)
+
+This post will show you how to add local data files to your **blogdown** site, and the file paths to read those data files in an R code chunk. (If you came here looking for how to add static images and use file paths, please see [this post](https://blogdown-demo.rbind.io/2017/10/06/adding-figures-and-other-images-to-posts/).)
+
+# TL;DR
+
+Let's say you have a data file called `"mazes.csv"`, and you want to read in that CSV file in an R chunk. The below table summarizes where the file should live in your **blogdown** site directory, and the file paths to use.
+
+
+<font size="3">
+
+| File location             | File path in R chunk            | File path using here package          |
+|---------------------------|---------------------------------|---------------------------------------|
+| `/content/post/mazes.csv` | `"mazes.csv"`                   | no need!                              |
+| `/static/mazes.csv`       | `"../../static/mazes.csv"`      | `here("static", "mazes.csv")`         |
+| `/static/data/mazes.csv`  | `"../../static/data/mazes.csv"` | `here("static", "data", "mazes.csv")` |
+| `raw` GitHub url          | `"raw_url/mazes.csv"`                 | no need!                              |
+
+</font>
+
+More detail on each of these scenarios below. We'll use `readr::read_csv()`, so you'll need to install and load the **readr** package:
+```{r}
+# install.packages("readr")
+library(readr)
+```
+
+
+## Place file in your `post/` folder
+
+What to do:
+
+- File goes in `/content/post/mazes.csv`
+- R file path is `"mazes.csv"`
+
+Example: 
+
+```{r eval = FALSE}
+mazes <- read_csv("mazes.csv")
+```
+
+
+## Place file in your `static/` folder
+
+What to do:
+
+- File goes in `/static/mazes.csv`
+- R file path is `"../../static/mazes.csv"`
+- R file path with [**here**](https://krlmlr.github.io/here/) is: `here("static", "mazes.csv")`
+
+Example: 
+
+```{r eval = FALSE}
+mazes <- read_csv("../../static/mazes.csv")
+# or
+library(here)
+mazes <- read_csv(here("static", "mazes.csv"))
+```
+
+## Place file in your `static/data/` folder
+
+What to do:
+
+- File goes in `/static/data/mazes.csv`
+- R file path is `"../../static/data/mazes.csv"`
+- R file path with [**here**](https://krlmlr.github.io/here/) is: `here("static", "data", "mazes.csv")`
+
+Example: 
+
+```{r eval = FALSE}
+mazes <- read_csv("../../static/data/mazes.csv")
+# or
+library(here)
+mazes <- read_csv(here("static", "data", "mazes.csv"))
+```
+
+## Place `"mazes.csv"` online
+
+What to do:
+
+- File goes online: options include in a [GitHub gist](https://gist.github.com) or push to your site's repo
+- Use the `raw` GitHub or gist url
+
+Example: 
+
+```{r eval = FALSE}
+mazes_gist <- "https://gist.githubusercontent.com/kylebgorman/77ce12c9167554ade560af9d34565c11/raw/c5d653fb146821ecd96a9aa085263c3f17480dd5/McFarlaneEtAl_MazeData-Deidentified.csv"
+mazes <- read_csv(mazes_gist)
+```
+
+
+# HERE
+
+How did [**here**](https://krlmlr.github.io/here/) work? 
+
+```{r}
+# use here to build the file path
+library(here)
+
+# read in the file
+mazes <- read_csv(here("static", "data", "mazes.csv"))
+mazes
+```
+
+Now that is some serious black magic. Let's break down what the **here** package did.
+
+```{r}
+# where are we?
+here() 
+
+# if mazes.csv were in static, this is the file path
+here("static", "mazes.csv")
+
+# but it is not! it is in /static/data
+here("static", "data", "mazes.csv")
+
+# you can read in directly
+mazes1 <- read_csv(here("static", "data", "mazes.csv"))
+
+# you can save the file path 
+mazes_file <- here("static", "data", "mazes.csv")
+
+# then read that in
+mazes2 <- read_csv(mazes_file)
+```
+
+For more of a breakdown, see [here, here](https://github.com/jennybc/here_here#readme) by [Jenny Bryan](https://twitter.com/JennyBryan).
+

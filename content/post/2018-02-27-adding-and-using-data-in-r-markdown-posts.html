@@ -1,0 +1,220 @@
+---
+title: Adding and reading local data files in R Markdown posts
+date: '2018-02-27'
+slug: r-file-paths
+output:
+  blogdown::html_page:
+    toc: true
+    number_sections: true
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#problem"><span class="toc-section-number">1</span> Problem</a></li>
+<li><a href="#tldr"><span class="toc-section-number">2</span> TL;DR</a><ul>
+<li><a href="#place-file-in-your-post-folder"><span class="toc-section-number">2.1</span> Place file in your <code>post/</code> folder</a></li>
+<li><a href="#place-file-in-your-static-folder"><span class="toc-section-number">2.2</span> Place file in your <code>static/</code> folder</a></li>
+<li><a href="#place-file-in-your-staticdata-folder"><span class="toc-section-number">2.3</span> Place file in your <code>static/data/</code> folder</a></li>
+<li><a href="#place-mazes.csv-online"><span class="toc-section-number">2.4</span> Place <code>&quot;mazes.csv&quot;</code> online</a></li>
+</ul></li>
+<li><a href="#here"><span class="toc-section-number">3</span> HERE</a></li>
+</ul>
+</div>
+
+<div id="problem" class="section level1">
+<h1><span class="header-section-number">1</span> Problem</h1>
+<p><strong>Problem:</strong> You want to read in a data file in an R code chunk in an R Markdown post. But:</p>
+<ul>
+<li>Where should you save the data file?</li>
+<li>What file path will work to run the code chunks in the console?</li>
+<li>What file path will work when you serve site?</li>
+</ul>
+<p><strong>Solution:</strong> Read on.</p>
+<div class="figure">
+<img src="https://media.giphy.com/media/3o7bu7YzD4FONt1nVK/giphy.gif" />
+
+</div>
+<p>This post will show you how to add local data files to your <strong>blogdown</strong> site, and the file paths to read those data files in an R code chunk. (If you came here looking for how to add static images and use file paths, please see <a href="https://blogdown-demo.rbind.io/2017/10/06/adding-figures-and-other-images-to-posts/">this post</a>.)</p>
+</div>
+<div id="tldr" class="section level1">
+<h1><span class="header-section-number">2</span> TL;DR</h1>
+<p>Let’s say you have a data file called <code>&quot;mazes.csv&quot;</code>, and you want to read in that CSV file in an R chunk. The below table summarizes where the file should live in your <strong>blogdown</strong> site directory, and the file paths to use.</p>
+<p><font size="3"></p>
+<table>
+<colgroup>
+<col width="27%" />
+<col width="33%" />
+<col width="39%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>File location</th>
+<th>File path in R chunk</th>
+<th>File path using here package</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>/content/post/mazes.csv</code></td>
+<td><code>&quot;mazes.csv&quot;</code></td>
+<td>no need!</td>
+</tr>
+<tr class="even">
+<td><code>/static/mazes.csv</code></td>
+<td><code>&quot;../../static/mazes.csv&quot;</code></td>
+<td><code>here(&quot;static&quot;, &quot;mazes.csv&quot;)</code></td>
+</tr>
+<tr class="odd">
+<td><code>/static/data/mazes.csv</code></td>
+<td><code>&quot;../../static/data/mazes.csv&quot;</code></td>
+<td><code>here(&quot;static&quot;, &quot;data&quot;, &quot;mazes.csv&quot;)</code></td>
+</tr>
+<tr class="even">
+<td><code>raw</code> GitHub url</td>
+<td><code>&quot;raw_url/mazes.csv&quot;</code></td>
+<td>no need!</td>
+</tr>
+</tbody>
+</table>
+<p></font></p>
+<p>More detail on each of these scenarios below. We’ll use <code>readr::read_csv()</code>, so you’ll need to install and load the <strong>readr</strong> package:</p>
+<pre class="r"><code># install.packages(&quot;readr&quot;)
+library(readr)</code></pre>
+<div id="place-file-in-your-post-folder" class="section level2">
+<h2><span class="header-section-number">2.1</span> Place file in your <code>post/</code> folder</h2>
+<p>What to do:</p>
+<ul>
+<li>File goes in <code>/content/post/mazes.csv</code></li>
+<li>R file path is <code>&quot;mazes.csv&quot;</code></li>
+</ul>
+<p>Example:</p>
+<pre class="r"><code>mazes &lt;- read_csv(&quot;mazes.csv&quot;)</code></pre>
+</div>
+<div id="place-file-in-your-static-folder" class="section level2">
+<h2><span class="header-section-number">2.2</span> Place file in your <code>static/</code> folder</h2>
+<p>What to do:</p>
+<ul>
+<li>File goes in <code>/static/mazes.csv</code></li>
+<li>R file path is <code>&quot;../../static/mazes.csv&quot;</code></li>
+<li>R file path with <a href="https://krlmlr.github.io/here/"><strong>here</strong></a> is: <code>here(&quot;static&quot;, &quot;mazes.csv&quot;)</code></li>
+</ul>
+<p>Example:</p>
+<pre class="r"><code>mazes &lt;- read_csv(&quot;../../static/mazes.csv&quot;)
+# or
+library(here)
+mazes &lt;- read_csv(here(&quot;static&quot;, &quot;mazes.csv&quot;))</code></pre>
+</div>
+<div id="place-file-in-your-staticdata-folder" class="section level2">
+<h2><span class="header-section-number">2.3</span> Place file in your <code>static/data/</code> folder</h2>
+<p>What to do:</p>
+<ul>
+<li>File goes in <code>/static/data/mazes.csv</code></li>
+<li>R file path is <code>&quot;../../static/data/mazes.csv&quot;</code></li>
+<li>R file path with <a href="https://krlmlr.github.io/here/"><strong>here</strong></a> is: <code>here(&quot;static&quot;, &quot;data&quot;, &quot;mazes.csv&quot;)</code></li>
+</ul>
+<p>Example:</p>
+<pre class="r"><code>mazes &lt;- read_csv(&quot;../../static/data/mazes.csv&quot;)
+# or
+library(here)
+mazes &lt;- read_csv(here(&quot;static&quot;, &quot;data&quot;, &quot;mazes.csv&quot;))</code></pre>
+</div>
+<div id="place-mazes.csv-online" class="section level2">
+<h2><span class="header-section-number">2.4</span> Place <code>&quot;mazes.csv&quot;</code> online</h2>
+<p>What to do:</p>
+<ul>
+<li>File goes online: options include in a <a href="https://gist.github.com">GitHub gist</a> or push to your site’s repo</li>
+<li>Use the <code>raw</code> GitHub or gist url</li>
+</ul>
+<p>Example:</p>
+<pre class="r"><code>mazes_gist &lt;- &quot;https://gist.githubusercontent.com/kylebgorman/77ce12c9167554ade560af9d34565c11/raw/c5d653fb146821ecd96a9aa085263c3f17480dd5/McFarlaneEtAl_MazeData-Deidentified.csv&quot;
+mazes &lt;- read_csv(mazes_gist)</code></pre>
+</div>
+</div>
+<div id="here" class="section level1">
+<h1><span class="header-section-number">3</span> HERE</h1>
+<p>How did <a href="https://krlmlr.github.io/here/"><strong>here</strong></a> work?</p>
+<pre class="r"><code># use here to build the file path
+library(here)</code></pre>
+<pre><code>## here() starts at /Users/hillali/Documents/Projects/r-projects/blogdown-demo</code></pre>
+<pre class="r"><code># read in the file
+mazes &lt;- read_csv(here(&quot;static&quot;, &quot;data&quot;, &quot;mazes.csv&quot;))</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Study.ID = col_character(),
+##   CA = col_double(),
+##   VIQ = col_double(),
+##   DX = col_character(),
+##   Activity = col_character(),
+##   Content = col_double(),
+##   Filler = col_double(),
+##   REP = col_double(),
+##   REV = col_double(),
+##   FS = col_double(),
+##   Cued = col_double(),
+##   Not.Cued = col_double()
+## )</code></pre>
+<pre class="r"><code>mazes</code></pre>
+<pre><code>## # A tibble: 381 x 12
+##    Study.ID    CA   VIQ DX    Activity    Content Filler   REP   REV    FS
+##    &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;         &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 CSLU-001  5.67   124 TD    Conversati…   24.0   31.0   2.00  5.00 17.0 
+##  2 CSLU-001  5.67   124 TD    Picture De…    1.00   2.00  0     0     1.00
+##  3 CSLU-001  5.67   124 TD    Play          21.0    6.00  3.00  8.00 10.0 
+##  4 CSLU-001  5.67   124 TD    Wordless P…    8.00   2.00  0     4.00  4.00
+##  5 CSLU-002  6.50   124 TD    Conversati…    3.00  10.0   3.00  0     0   
+##  6 CSLU-002  6.50   124 TD    Picture De…    5.00   3.00  2.00  1.00  2.00
+##  7 CSLU-002  6.50   124 TD    Play           8.00   8.00  3.00  2.00  3.00
+##  8 CSLU-002  6.50   124 TD    Wordless P…    2.00   2.00  0     0     2.00
+##  9 CSLU-007  7.50   108 TD    Conversati…   25.0   21.0   4.00  4.00 17.0 
+## 10 CSLU-007  7.50   108 TD    Picture De…   10.0   13.0   0     2.00  8.00
+## # ... with 371 more rows, and 2 more variables: Cued &lt;dbl&gt;, Not.Cued &lt;dbl&gt;</code></pre>
+<p>Now that is some serious black magic. Let’s break down what the <strong>here</strong> package did.</p>
+<pre class="r"><code># where are we?
+here() </code></pre>
+<pre><code>## [1] &quot;/Users/hillali/Documents/Projects/r-projects/blogdown-demo&quot;</code></pre>
+<pre class="r"><code># if mazes.csv were in static, this is the file path
+here(&quot;static&quot;, &quot;mazes.csv&quot;)</code></pre>
+<pre><code>## [1] &quot;/Users/hillali/Documents/Projects/r-projects/blogdown-demo/static/mazes.csv&quot;</code></pre>
+<pre class="r"><code># but it is not! it is in /static/data
+here(&quot;static&quot;, &quot;data&quot;, &quot;mazes.csv&quot;)</code></pre>
+<pre><code>## [1] &quot;/Users/hillali/Documents/Projects/r-projects/blogdown-demo/static/data/mazes.csv&quot;</code></pre>
+<pre class="r"><code># you can read in directly
+mazes1 &lt;- read_csv(here(&quot;static&quot;, &quot;data&quot;, &quot;mazes.csv&quot;))</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Study.ID = col_character(),
+##   CA = col_double(),
+##   VIQ = col_double(),
+##   DX = col_character(),
+##   Activity = col_character(),
+##   Content = col_double(),
+##   Filler = col_double(),
+##   REP = col_double(),
+##   REV = col_double(),
+##   FS = col_double(),
+##   Cued = col_double(),
+##   Not.Cued = col_double()
+## )</code></pre>
+<pre class="r"><code># you can save the file path 
+mazes_file &lt;- here(&quot;static&quot;, &quot;data&quot;, &quot;mazes.csv&quot;)
+
+# then read that in
+mazes2 &lt;- read_csv(mazes_file)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Study.ID = col_character(),
+##   CA = col_double(),
+##   VIQ = col_double(),
+##   DX = col_character(),
+##   Activity = col_character(),
+##   Content = col_double(),
+##   Filler = col_double(),
+##   REP = col_double(),
+##   REV = col_double(),
+##   FS = col_double(),
+##   Cued = col_double(),
+##   Not.Cued = col_double()
+## )</code></pre>
+<p>For more of a breakdown, see <a href="https://github.com/jennybc/here_here#readme">here, here</a> by <a href="https://twitter.com/JennyBryan">Jenny Bryan</a>.</p>
+</div>
