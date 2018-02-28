@@ -2,6 +2,7 @@
 title: Adding and reading local data files in R Markdown posts
 date: '2018-02-27'
 slug: r-file-paths
+raw: "https://raw.githubusercontent.com/rbind/blogdown-demo/master/content/post/2018-02-27-adding-and-using-data-in-r-markdown-posts.Rmd"
 output:
   blogdown::html_page:
     toc: true
