@@ -25,7 +25,7 @@
       <guid>{{ .Permalink }}</guid>
       <!--  from https://discourse.gohugo.io/t/full-text-rss-feed/8368/2 -->
       <description>{{ .Summary | safeHTML }}</description>
-      <content:encoded>{{ .Content | safeHTML }}</content:encoded>
+      <content>{{ .Content | safeHTML }}</content>
     </item>
     {{ end }}
   </channel>
