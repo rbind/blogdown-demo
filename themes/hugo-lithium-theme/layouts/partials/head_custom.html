@@ -1,0 +1,5 @@
+<!--  https://gohugo.io/templates/rss/#the-embedded-rss-xml -->
+
+{{ range .AlternativeOutputFormats -}}
+  <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}" title="{{ $.Site.Title }}">
+{{ end -}}
