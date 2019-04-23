@@ -8,8 +8,14 @@ raw: "https://raw.githubusercontent.com/rbind/blogdown-demo/master/content/post/
 
 
 <p>Obviously, one of the main benefits of the <strong>blogdown</strong> package for R users is to be able to include R code in posts. To add R code, make sure that you start by creating a new R Markdown post (as opposed to a markdown post). You can do this one of two ways, either in the console:</p>
-<pre><code>blogdown::new_post(rmd = TRUE) # false is the default!</code></pre>
+<pre><code>blogdown::new_post(ext = &quot;.Rmd&quot;) # .md is the default</code></pre>
 <p>Or using the “new post” addin within RStudio, as described in the <a href="https://bookdown.org/yihui/blogdown/rstudio-ide.html">blogdown book</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:new-post"></span>
+<img src="https://raw.githubusercontent.com/rstudio/blogdown/master/docs/images/new-post.png" alt="Create a new post using the RStudio addin." width="80%" />
+<p class="caption">
+Figure 1: Create a new post using the RStudio addin.
+</p>
+</div>
 <p>As in R Markdown/<strong>knitr</strong> documents, you can include two types of R code: R code chunks, and inline R code.</p>
 <div id="example-1-adding-r-code-chunks" class="section level1">
 <h1>Example 1: Adding R code chunks</h1>
